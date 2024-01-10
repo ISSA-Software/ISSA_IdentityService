@@ -8,7 +8,11 @@
 
   <ItemGroup>
     <Folder Include="Migrations\" />
-    <Folder Include="Repository\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ISSA.Contract.Repository\ISSA.Contract.Repository.csproj" />
+    <ProjectReference Include="..\ISSA.Core\ISSA.Core.csproj" />
   </ItemGroup>
 
 </Project>

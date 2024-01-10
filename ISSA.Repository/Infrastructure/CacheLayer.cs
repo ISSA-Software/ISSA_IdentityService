@@ -8,11 +8,9 @@ using ISSA.Contract.Repository.Infrastructure;
 using ISSA.Repository.Base;
 
 namespace ISSA.Repository.Infrastructure;
-[ScopedDependency(ServiceType = typeof(ICacheLayer<>))]
-public class CacheLayer<T> : BaseCacheLayer<T>, IBaseCacheLayer<T>,  ICacheLayer<T> where T : BaseEntity, new()
-{
-    public CacheLayer(IMemoryCache memoryCache, IDistributedCache distributedCache, IConnectionMultiplexer connectionMultiplexer) : base(memoryCache, distributedCache, connectionMultiplexer)
-    {
 
-    }
+[ScopedDependency(ServiceType = typeof(ICacheLayer<>))]
+public class CacheLayer<T>(IMemoryCache memoryCache, IDistributedCache distributedCache, IConnectionMultiplexer connectionMultiplexer) : BaseCacheLayer<T>(memoryCache, distributedCache, connectionMultiplexer), IBaseCacheLayer<T>,  ICacheLayer<T> where T : BaseEntity, new()
+{
+
 }

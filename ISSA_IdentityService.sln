@@ -5,7 +5,7 @@ VisualStudioVersion = 17.8.34408.163
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebApi", "WebApi", "{F8AC455D-8A42-4565-8CDC-0AEDD70B1C0E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ISSA_IdentityService", "ISSA\ISSA_IdentityService.csproj", "{F6C7408C-1ABD-4251-8115-375221E43C01}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ISSA", "ISSA\ISSA.csproj", "{F6C7408C-1ABD-4251-8115-375221E43C01}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{6F200F96-1E31-40F7-81C1-9AA06A79E9CC}"
 EndProject
@@ -13,17 +13,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Repository", "Repository", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Service", "Service", "{8B3AA4CC-FF3A-48BF-A68D-3918C9956191}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ISSA.Core", "ISSA.Core\ISSA.Core.csproj", "{2233D8C4-D2C7-4CB1-8F4D-DC21D3AFE438}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ISSA.Core", "ISSA.Core\ISSA.Core.csproj", "{2233D8C4-D2C7-4CB1-8F4D-DC21D3AFE438}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ISSA.Mapper", "ISSA.Mapper\ISSA.Mapper.csproj", "{6260E311-EEEC-4DA1-8024-08D11BC34B57}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ISSA.Mapper", "ISSA.Mapper\ISSA.Mapper.csproj", "{6260E311-EEEC-4DA1-8024-08D11BC34B57}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ISSA.Contract.Repository", "ISSA.Contract.Repository\ISSA.Contract.Repository.csproj", "{41B68972-037E-414F-A17D-35E1996C9EA2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ISSA.Contract.Repository", "ISSA.Contract.Repository\ISSA.Contract.Repository.csproj", "{41B68972-037E-414F-A17D-35E1996C9EA2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ISSA.Repository", "ISSA.Repository\ISSA.Repository.csproj", "{654373FA-178C-4AA6-9A09-DECF6C5C128A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ISSA.Repository", "ISSA.Repository\ISSA.Repository.csproj", "{654373FA-178C-4AA6-9A09-DECF6C5C128A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ISSA.Contract.Service", "ISSA.Contract.Service\ISSA.Contract.Service.csproj", "{ED10AED8-12D4-4D74-A3D9-17EE75C489B5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ISSA.Contract.Service", "ISSA.Contract.Service\ISSA.Contract.Service.csproj", "{ED10AED8-12D4-4D74-A3D9-17EE75C489B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ISSA.Service", "ISSA.Service\ISSA.Service.csproj", "{9CF7EE84-A014-4C6A-8035-7A655C94519E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ISSA.Service", "ISSA.Service\ISSA.Service.csproj", "{9CF7EE84-A014-4C6A-8035-7A655C94519E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

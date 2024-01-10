@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 
 
 namespace ISSA.Contract.Repository.Entity.IdentityModels;
@@ -12,6 +13,7 @@ public class ApplicationUser : IdentityUser
 
     public bool IsDelete { get; set; } = false;
 
+    [Required]
     public DateTime CreatedTime { get; set; }
 
     public DateTime? LastUpdatedTime { get; set; }

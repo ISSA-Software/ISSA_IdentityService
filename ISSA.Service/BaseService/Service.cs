@@ -1,4 +1,4 @@
-﻿namespace ISSA.Service.Base_Service
+﻿namespace ISSA.Service.BaseService
 {
     public abstract class Service
     {

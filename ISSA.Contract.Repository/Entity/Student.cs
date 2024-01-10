@@ -1,10 +1,12 @@
 ﻿using ISSA.Contract.Repository.Entity.IdentityModels;
+using System.ComponentModel.DataAnnotations;
 
 namespace ISSA.Contract.Repository.Entity
 {
     public class Student : BaseEntity
     {
-        public required string ApplicationUserId { get; set; } = string.Empty;
+        [Required]
+        public string ApplicationUserId { get; set; } = string.Empty;
 
         public ApplicationUser? ApplicationUser { get; set; }
     }
