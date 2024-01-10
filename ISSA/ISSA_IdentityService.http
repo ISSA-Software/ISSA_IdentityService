@@ -1,0 +1,6 @@
+@ISSA_IdentityService_HostAddress = http://localhost:5150
+
+GET {{ISSA_IdentityService_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
