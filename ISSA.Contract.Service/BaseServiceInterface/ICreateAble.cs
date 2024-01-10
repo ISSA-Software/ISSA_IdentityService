@@ -1,4 +1,4 @@
-﻿namespace ISSA.Contract.Service.BaseServiceInterface
+﻿namespace ISSA_IdentityService.Contract.Service.BaseServiceInterface
 {
     public interface ICreateAble<in T, TKey> where T : class, new()
     {

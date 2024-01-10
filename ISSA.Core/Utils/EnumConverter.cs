@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 
-namespace ISSA.Core.Utils;
+namespace ISSA_IdentityService.Core.Utils;
 public class EnumConverter<T> : JsonConverter<T> where T : System.Enum
 {
     public override T? ReadJson(JsonReader reader, Type objectType, T? existingValue, bool hasExistingValue, JsonSerializer serializer)

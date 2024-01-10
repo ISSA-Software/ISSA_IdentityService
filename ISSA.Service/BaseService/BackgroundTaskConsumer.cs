@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace ISSA.Service.BaseService;
+namespace ISSA_IdentityService.Service.BaseService;
 public class BackgroundTaskConsumer : BackgroundService
 {
     private IServiceProvider Services { get; }

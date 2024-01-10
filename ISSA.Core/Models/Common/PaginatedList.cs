@@ -1,8 +1,8 @@
 ﻿using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
-using ISSA.Core.QueryObject;
+using ISSA_IdentityService.Core.QueryObject;
 
-namespace ISSA.Core.Models.Common;
+namespace ISSA_IdentityService.Core.Models.Common;
 public class PaginatedList<T>
 {
     public IReadOnlyCollection<T> Items { get; }

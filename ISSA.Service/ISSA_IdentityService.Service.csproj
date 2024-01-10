@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ISSA.Contract.Service\ISSA_IdentityService.Contract.Service.csproj" />
+    <ProjectReference Include="..\ISSA.Core\ISSA_IdentityService.Core.csproj" />
+    <ProjectReference Include="..\ISSA.Mapper\ISSA_IdentityService.Mapper.csproj" />
+    <ProjectReference Include="..\ISSA.Repository\ISSA_IdentityService.Repository.csproj" />
+  </ItemGroup>
+
+</Project>

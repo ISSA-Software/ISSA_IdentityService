@@ -1,4 +1,4 @@
-﻿namespace ISSA.Core.Models.Common;
+﻿namespace ISSA_IdentityService.Core.Models.Common;
 public class Result
 {
     internal Result(bool succeeded, IEnumerable<string> errors)

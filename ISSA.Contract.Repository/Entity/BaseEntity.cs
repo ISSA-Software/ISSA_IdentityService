@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ISSA.Contract.Repository.Entity
+namespace ISSA_IdentityService.Contract.Repository.Entity
 {
     public abstract class BaseEntity
     {

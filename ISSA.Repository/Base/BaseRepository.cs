@@ -1,11 +1,11 @@
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
-using ISSA.Contract.Repository.BaseInterface;
-using ISSA.Contract.Repository.Entity;
-using ISSA.Core.Utils;
+using ISSA_IdentityService.Contract.Repository.BaseInterface;
+using ISSA_IdentityService.Contract.Repository.Entity;
+using ISSA_IdentityService.Core.Utils;
 
-namespace ISSA.Repository.Base
+namespace ISSA_IdentityService.Repository.Base
 {
     public abstract class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity, new()
     {

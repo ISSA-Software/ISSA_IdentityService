@@ -1,9 +1,9 @@
-﻿using ISSA.Contract.Repository.Entity;
-using ISSA.Contract.Service.BaseServiceInterface;
-using ISSA.Core.Models;
-using ISSA.Core.QueryObject;
+﻿using ISSA_IdentityService.Contract.Repository.Entity;
+using ISSA_IdentityService.Contract.Service.BaseServiceInterface;
+using ISSA_IdentityService.Core.Models;
+using ISSA_IdentityService.Core.QueryObject;
 
-namespace ISSA.Contract.Service.Interface
+namespace ISSA_IdentityService.Contract.Service.Interface
 {
     public interface IStudentService :
         ICreateAble<StudentModel, string>,

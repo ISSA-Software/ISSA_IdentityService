@@ -1,7 +1,7 @@
-﻿using ISSA.Core.Utils;
-using ISSA.Core.ValueObject;
+﻿using ISSA_IdentityService.Core.Utils;
+using ISSA_IdentityService.Core.ValueObject;
 
-namespace ISSA.Core.Models.Common;
+namespace ISSA_IdentityService.Core.Models.Common;
 public class BaseResponseModel<T>
 {
     public T? Data { get; set; }

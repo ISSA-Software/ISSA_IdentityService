@@ -1,8 +1,8 @@
 using System.Linq.Expressions;
-using ISSA.Contract.Repository.Entity;
+using ISSA_IdentityService.Contract.Repository.Entity;
 using Microsoft.EntityFrameworkCore.Query;
 
-namespace ISSA.Contract.Repository.BaseInterface;
+namespace ISSA_IdentityService.Contract.Repository.BaseInterface;
 public interface IBaseRepository<T> where T : BaseEntity, new()
 {
     Task<T?> GetSingleAsync(Expression<Func<T, bool>>? filter = null, CancellationToken cancellationToken = default, params Expression<Func<T, object>>[]? includes);

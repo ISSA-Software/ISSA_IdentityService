@@ -1,7 +1,7 @@
-﻿using ISSA.Contract.Repository.Entity.IdentityModels;
-using ISSA.Core.Models.Common;
+﻿using ISSA_IdentityService.Contract.Repository.Entity.IdentityModels;
+using ISSA_IdentityService.Core.Models.Common;
 
-namespace ISSA.Contract.Service.BaseServiceInterface;
+namespace ISSA_IdentityService.Contract.Service.BaseServiceInterface;
 public interface IBaseIdentityService
 {
     Task<string?> GetUserNameAsync(string userId);

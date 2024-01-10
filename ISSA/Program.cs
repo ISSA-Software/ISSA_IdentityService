@@ -1,9 +1,9 @@
 using Invedia.DI;
-using ISSA.Contract.Repository.Entity.IdentityModels;
-using ISSA.Core.Config;
-using ISSA.Repository.Infrastructure;
-using ISSA.Service.BaseService;
-using ISSA.Extensions;
+using ISSA_IdentityService.Contract.Repository.Entity.IdentityModels;
+using ISSA_IdentityService.Core.Config;
+using ISSA_IdentityService.Repository.Infrastructure;
+using ISSA_IdentityService.Service.BaseService;
+using ISSA_IdentityService.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
@@ -20,7 +20,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace ISSA
+namespace ISSA_IdentityService
 {
     public class Program
     {

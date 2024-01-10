@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
-using ISSA.Core.Config;
+using ISSA_IdentityService.Core.Config;
 
-namespace ISSA.Core.Utils;
+namespace ISSA_IdentityService.Core.Utils;
 public class SystemHelper
 {
     public static SystemSettingModel Setting => SystemSettingModel.Instance;

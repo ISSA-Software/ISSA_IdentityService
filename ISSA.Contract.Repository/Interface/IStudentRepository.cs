@@ -1,7 +1,7 @@
-﻿using ISSA.Contract.Repository.Entity;
-using ISSA.Contract.Repository.Infrastructure;
+﻿using ISSA_IdentityService.Contract.Repository.Entity;
+using ISSA_IdentityService.Contract.Repository.Infrastructure;
 
-namespace ISSA.Contract.Repository.Interface
+namespace ISSA_IdentityService.Contract.Repository.Interface
 {
     public interface IStudentRepository : IRepository<Student>
     {

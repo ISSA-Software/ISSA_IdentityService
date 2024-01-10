@@ -1,12 +1,12 @@
-﻿using ISSA.Contract.Repository.Entity;
-using ISSA.Contract.Service.Interface;
-using ISSA.Controllers;
-using ISSA.Core.Models;
-using ISSA.Core.Models.Common;
-using ISSA.Core.QueryObject;
+﻿using ISSA_IdentityService.Contract.Repository.Entity;
+using ISSA_IdentityService.Contract.Service.Interface;
+using ISSA_IdentityService.Controllers;
+using ISSA_IdentityService.Core.Models;
+using ISSA_IdentityService.Core.Models.Common;
+using ISSA_IdentityService.Core.QueryObject;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ISSA.Controllers
+namespace ISSA_IdentityService.Controllers
 {
     [ApiController]
     public class StudentController(IStudentService service) : ApiControllerBase

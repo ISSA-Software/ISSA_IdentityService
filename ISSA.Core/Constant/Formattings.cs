@@ -3,7 +3,7 @@ using System.Xml;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
-namespace ISSA.Core.Constant;
+namespace ISSA_IdentityService.Core.Constant;
 
 public static class Formattings
 {

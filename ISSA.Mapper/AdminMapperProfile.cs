@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using ISSA.Contract.Repository.Entity;
-using ISSA.Core.Models;
+using ISSA_IdentityService.Contract.Repository.Entity;
+using ISSA_IdentityService.Core.Models;
 
-namespace ISSA.Mapper
+namespace ISSA_IdentityService.Mapper
 {
     public class AdminMapperProfile : Profile
     {

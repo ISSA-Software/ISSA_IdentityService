@@ -2,7 +2,7 @@
 using Microsoft.IdentityModel.Tokens;
 using System.Reflection;
 
-namespace ISSA.Core.Config;
+namespace ISSA_IdentityService.Core.Config;
 public class SystemSettingModel
 {
     public static SystemSettingModel Instance { get; set; }

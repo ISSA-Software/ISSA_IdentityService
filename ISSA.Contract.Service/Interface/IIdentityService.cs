@@ -1,6 +1,6 @@
-﻿using ISSA.Contract.Service.BaseServiceInterface;
+﻿using ISSA_IdentityService.Contract.Service.BaseServiceInterface;
 
-namespace ISSA.Contract.Service.Interface
+namespace ISSA_IdentityService.Contract.Service.Interface
 {
     public interface IIdentityService : IBaseIdentityService
     {

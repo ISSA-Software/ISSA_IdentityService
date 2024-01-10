@@ -1,4 +1,4 @@
-﻿namespace ISSA.Core.QueryObject
+﻿namespace ISSA_IdentityService.Core.QueryObject
 {
     public record MentorQuery : BaseQuery
     {

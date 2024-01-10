@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 
 
-namespace ISSA.Contract.Repository.Entity.IdentityModels;
+namespace ISSA_IdentityService.Contract.Repository.Entity.IdentityModels;
 
 public class ApplicationUser : IdentityUser
 {

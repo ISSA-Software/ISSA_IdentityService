@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace ISSA.Core.Models.Common;
+namespace ISSA_IdentityService.Core.Models.Common;
 public static class IdentityResultExtensions
 {
     public static Result ToApplicationResult(this IdentityResult result)

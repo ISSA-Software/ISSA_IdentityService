@@ -1,4 +1,4 @@
-﻿namespace ISSA.Core.Constant;
+﻿namespace ISSA_IdentityService.Core.Constant;
 public class ErrorCode
 {
     public const string BadRequest = "Bad Request";

@@ -1,11 +1,11 @@
 ﻿using System.Reflection;
 using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Http;
-using ISSA.Core.Constant;
-using ISSA.Core.ValueObject;
+using ISSA_IdentityService.Core.Constant;
+using ISSA_IdentityService.Core.ValueObject;
 using TimeZoneConverter;
 
-namespace ISSA.Core.Utils;
+namespace ISSA_IdentityService.Core.Utils;
 public static class CoreHelper
 {
     private static readonly IHttpContextAccessor? _contextAccessor;

@@ -1,4 +1,4 @@
-﻿namespace ISSA.Core.Enum
+﻿namespace ISSA_IdentityService.Core.Enum
 {
     public enum Status
     {

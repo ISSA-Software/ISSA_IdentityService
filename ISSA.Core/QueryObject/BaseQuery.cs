@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace ISSA.Core.QueryObject;
+namespace ISSA_IdentityService.Core.QueryObject;
 public record class BaseQuery
 {
     [BindProperty(Name = "page", SupportsGet = true)]

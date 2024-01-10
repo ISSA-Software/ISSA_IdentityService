@@ -2,10 +2,10 @@
 using Invedia.DI.Attributes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using ISSA.Core.Utils;
-using ISSA.Repository.Base;
+using ISSA_IdentityService.Core.Utils;
+using ISSA_IdentityService.Repository.Base;
 
-namespace ISSA.Repository.Infrastructure;
+namespace ISSA_IdentityService.Repository.Infrastructure;
 //[ScopedDependency(ServiceType = typeof(AppDbContext))]
 public sealed partial class AppDbContext : BaseDbContext
 {

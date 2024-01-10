@@ -4,12 +4,12 @@ using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Caching.Memory;
 using Newtonsoft.Json;
 using StackExchange.Redis;
-using ISSA.Contract.Repository.BaseInterface;
-using ISSA.Contract.Repository.Entity;
-using ISSA.Core.Models.Common;
-using ISSA.Core.Utils;
+using ISSA_IdentityService.Contract.Repository.BaseInterface;
+using ISSA_IdentityService.Contract.Repository.Entity;
+using ISSA_IdentityService.Core.Models.Common;
+using ISSA_IdentityService.Core.Utils;
 
-namespace ISSA.Repository.Base;
+namespace ISSA_IdentityService.Repository.Base;
 public class BaseCacheLayer<T> : IBaseCacheLayer<T> where T : BaseEntity, new()
 {
     private readonly IDistributedCache _distributedCache;

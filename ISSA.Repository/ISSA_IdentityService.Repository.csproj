@@ -11,8 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ISSA.Contract.Repository\ISSA.Contract.Repository.csproj" />
-    <ProjectReference Include="..\ISSA.Core\ISSA.Core.csproj" />
+    <ProjectReference Include="..\ISSA.Contract.Repository\ISSA_IdentityService.Contract.Repository.csproj" />
+    <ProjectReference Include="..\ISSA.Core\ISSA_IdentityService.Core.csproj" />
   </ItemGroup>
 
 </Project>

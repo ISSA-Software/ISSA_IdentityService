@@ -1,7 +1,7 @@
-﻿using ISSA.Contract.Repository.Entity.IdentityModels;
+﻿using ISSA_IdentityService.Contract.Repository.Entity.IdentityModels;
 using System.ComponentModel.DataAnnotations;
 
-namespace ISSA.Contract.Repository.Entity
+namespace ISSA_IdentityService.Contract.Repository.Entity
 {
     public class Admin : BaseEntity
     {

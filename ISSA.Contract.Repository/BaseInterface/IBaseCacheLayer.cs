@@ -1,7 +1,7 @@
-﻿using ISSA.Contract.Repository.Entity;
-using ISSA.Core.Models.Common;
+﻿using ISSA_IdentityService.Contract.Repository.Entity;
+using ISSA_IdentityService.Core.Models.Common;
 
-namespace ISSA.Contract.Repository.BaseInterface;
+namespace ISSA_IdentityService.Contract.Repository.BaseInterface;
 public interface IBaseCacheLayer<T> where T : BaseEntity, new()
 {
     Task<T?> GetSingleAsync(string key, CancellationToken cancellationToken = default);

@@ -1,6 +1,6 @@
-﻿using ISSA.Mapper;
+﻿using ISSA_IdentityService.Mapper;
 
-namespace ISSA.Extensions
+namespace ISSA_IdentityService.Extensions
 {
     public static class AutoMapperExtension
     {

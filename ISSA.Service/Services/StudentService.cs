@@ -1,14 +1,14 @@
 ﻿using AutoMapper;
 using Invedia.DI.Attributes;
-using ISSA.Contract.Repository.Entity;
-using ISSA.Contract.Repository.Infrastructure;
-using ISSA.Contract.Repository.Interface;
-using ISSA.Contract.Service.Interface;
-using ISSA.Core.Models;
-using ISSA.Core.Models.Common;
-using ISSA.Core.QueryObject;
+using ISSA_IdentityService.Contract.Repository.Entity;
+using ISSA_IdentityService.Contract.Repository.Infrastructure;
+using ISSA_IdentityService.Contract.Repository.Interface;
+using ISSA_IdentityService.Contract.Service.Interface;
+using ISSA_IdentityService.Core.Models;
+using ISSA_IdentityService.Core.Models.Common;
+using ISSA_IdentityService.Core.QueryObject;
 
-namespace ISSA.Service.Services
+namespace ISSA_IdentityService.Service.Services
 {
     [ScopedDependency(ServiceType = typeof(IStudentService))]
     public class StudentService(IStudentRepository studentRepository, IMapper mapper, ICacheLayer<Student> cacheLayer) : BaseService.Service, IStudentService

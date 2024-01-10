@@ -1,9 +1,9 @@
 ﻿using Invedia.DI.Attributes;
-using ISSA.Contract.Repository.Entity;
-using ISSA.Contract.Repository.Interface;
-using ISSA.Repository.Infrastructure;
+using ISSA_IdentityService.Contract.Repository.Entity;
+using ISSA_IdentityService.Contract.Repository.Interface;
+using ISSA_IdentityService.Repository.Infrastructure;
 
-namespace ISSA.Repository.Repository
+namespace ISSA_IdentityService.Repository.Repository
 {
     [ScopedDependency(ServiceType = typeof(IMentorRepository))]
     public class MentorRepository(AppDbContext dbContext) : Repository<Mentor>(dbContext), IMentorRepository

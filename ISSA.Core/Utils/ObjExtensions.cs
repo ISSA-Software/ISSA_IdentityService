@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ISSA.Core.Utils;
+namespace ISSA_IdentityService.Core.Utils;
 public static class ObjExtensions
 {
     public static string ToJsonString(this object obj)

@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace ISSA.Core.Utils;
+namespace ISSA_IdentityService.Core.Utils;
 public class ExpressionInspect : ExpressionVisitor
 {
     public string? Id { get; set; }

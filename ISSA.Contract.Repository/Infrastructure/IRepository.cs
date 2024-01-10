@@ -1,6 +1,6 @@
-﻿using ISSA.Contract.Repository.BaseInterface;
+﻿using ISSA_IdentityService.Contract.Repository.BaseInterface;
 
-namespace ISSA.Contract.Repository.Infrastructure;
+namespace ISSA_IdentityService.Contract.Repository.Infrastructure;
 public interface IRepository<T> : IBaseRepository<T> where T : Entity.BaseEntity, new()
 {
 

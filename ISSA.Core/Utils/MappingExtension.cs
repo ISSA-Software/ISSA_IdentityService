@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
-using ISSA.Core.Models.Common;
-using ISSA.Core.QueryObject;
+using ISSA_IdentityService.Core.Models.Common;
+using ISSA_IdentityService.Core.QueryObject;
 
-namespace ISSA.Core.Utils;
+namespace ISSA_IdentityService.Core.Utils;
 public static class MappingExtension
 {
     public static Task<PaginatedList<TDestination>> PaginatedListAsync<TDestination>(this IQueryable<TDestination> queryable, BaseQuery query) where TDestination : class

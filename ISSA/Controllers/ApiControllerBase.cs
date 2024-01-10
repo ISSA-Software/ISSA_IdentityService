@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace ISSA.Controllers
+namespace ISSA_IdentityService.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]

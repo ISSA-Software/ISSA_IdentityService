@@ -1,4 +1,4 @@
-﻿namespace ISSA.Core.ValueObject;
+﻿namespace ISSA_IdentityService.Core.ValueObject;
 public record EnumObject
 { 
 
