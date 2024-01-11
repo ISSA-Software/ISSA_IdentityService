@@ -102,6 +102,7 @@ namespace ISSA_IdentityService
             {
                 options.Configuration = builder.Configuration.GetConnectionString("RedisConnection");
             });
+
             _ = builder.Services.AddSingleton<IConnectionMultiplexer>(await ConnectionMultiplexer.ConnectAsync(builder.Configuration.GetConnectionString("RedisConnection")));
 
             builder.Services.ConfigureAuthentication();
@@ -164,7 +165,7 @@ namespace ISSA_IdentityService
         public string? TransformOutbound(object value)
         {
             var name = value.ToString();
-            return name == null ? null : Regex.Replace(name, "([a-z])([A-Z])", "$1-$2").ToLower();
+            return name == null ? string.Empty : Regex.Replace(name, "([a-z])([A-Z])", "$1-$2").ToLower();
         }
     }
 

@@ -20,9 +20,9 @@ namespace ISSA_IdentityService.Extensions
                 options.Password.RequireNonAlphanumeric = true;
                 options.Password.RequireUppercase = true;
             }).AddRoleManager<RoleManager<IdentityRole>>()
-         .AddRoles<IdentityRole>()
-         .AddEntityFrameworkStores<AppDbContext>()
-         .AddDefaultTokenProviders();
+              .AddRoles<IdentityRole>()
+              .AddEntityFrameworkStores<AppDbContext>()
+              .AddDefaultTokenProviders();
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
