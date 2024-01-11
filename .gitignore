@@ -361,3 +361,8 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/ISSA/private_key.pem
+/ISSA/public_key.pem
+/ISSA/appsettings.Development.json
+/ISSA/appsettings.json
+/ISSA/private_key.pem

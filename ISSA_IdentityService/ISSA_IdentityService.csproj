@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <InvariantGlobalization>true</InvariantGlobalization>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ISSA_IdentityService.Contract.Repository\ISSA_IdentityService.Contract.Repository.csproj" />
+    <ProjectReference Include="..\ISSA_IdentityService.Contract.Service\ISSA_IdentityService.Contract.Service.csproj" />
+    <ProjectReference Include="..\ISSA_IdentityService.Core\ISSA_IdentityService.Core.csproj" />
+    <ProjectReference Include="..\ISSA_IdentityService.Repository\ISSA_IdentityService.Repository.csproj" />
+    <ProjectReference Include="..\ISSA_IdentityService.Service\ISSA_IdentityService.Service.csproj" />
+  </ItemGroup>
+
+</Project>
