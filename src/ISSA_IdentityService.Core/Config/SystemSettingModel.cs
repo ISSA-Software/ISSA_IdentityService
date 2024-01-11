@@ -11,7 +11,7 @@ public class SystemSettingModel
     public string ApplicationName { get; set; } = Assembly.GetEntryAssembly()?.GetName().Name;
     public static SecurityKey? RSAPrivateKey { get; set; }
     public static SecurityKey? RSAPublicKey { get; set; }
-
+    public static string? Environment { get; set; }
 
     public string? Domain { get; set; }
 }
