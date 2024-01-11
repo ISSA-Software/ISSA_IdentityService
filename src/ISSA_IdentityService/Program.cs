@@ -1,5 +1,4 @@
 using Invedia.DI;
-using ISSA_IdentityService.Contract.Repository.Entity.IdentityModels;
 using ISSA_IdentityService.Core.Config;
 using ISSA_IdentityService.Repository.Infrastructure;
 using ISSA_IdentityService.Service.BaseService;
@@ -10,14 +9,11 @@ using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Logging;
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using Serilog;
 using StackExchange.Redis;
 using System.IO.Compression;
-using System.Security.Cryptography;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace ISSA_IdentityService
@@ -28,6 +24,8 @@ namespace ISSA_IdentityService
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            SystemSettingModel.Environment = builder.Environment.EnvironmentName;
+
             SystemSettingModel.Configs = builder.Configuration.AddJsonFile("appsettings.json", false, true)
                .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", false, true)
                .AddUserSecrets<Program>(true, false)
@@ -37,75 +35,12 @@ namespace ISSA_IdentityService
             // Add services to the container.
             builder.Host.UseSerilog((hostingContext, loggerConfiguration) => loggerConfiguration.ReadFrom.Configuration(hostingContext.Configuration).Enrich.FromLogContext().WriteTo.Console());
 
-            string private_key = "";
-            string public_key = "";
-            try
-            {
-                private_key = File.ReadAllText(builder.Configuration["Jwt:PrivateKey"]);
-                public_key = File.ReadAllText(builder.Configuration["Jwt:PublicKey"]);
-                if (private_key != "" && public_key != "")
-                {
-                    var private_rsa = RSA.Create();
-                    private_rsa.ImportFromPem(private_key);
-                    SystemSettingModel.RSAPrivateKey = new RsaSecurityKey(private_rsa);
+            InitRSAKey.Init();
 
-                    var public_rsa = RSA.Create();
-                    public_rsa.ImportFromPem(public_key);
-                    SystemSettingModel.RSAPublicKey = new RsaSecurityKey(public_rsa);
-
-                }
-            }
-            catch (Exception e)
-            {
-                if (builder.Environment.IsDevelopment())
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.Error.WriteLine(e);
-                    Console.Error.WriteLine("Can't read private_key.pem or public_key.pem");
-                }
-            }
-            finally
-            {
-                if (SystemSettingModel.RSAPrivateKey == null || SystemSettingModel.RSAPublicKey == null)
-                {
-                    if (builder.Environment.IsDevelopment())
-                    {
-                        Console.ForegroundColor = ConsoleColor.Yellow;
-                        Console.WriteLine("Fallback to Hmac HS256 alg");
-                        Console.ResetColor();
-
-                    }
-                }
-            }
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
-            builder.Services.AddCors(options =>
-            {
-                options.AddPolicy("Development", policy =>
-                {
-                    policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
-                });
-                options.AddPolicy("Production", policy =>
-                {
-                    policy.WithOrigins(builder.Configuration["AllowedHosts"])
-                    .WithMethods(HttpMethod.Get.Method,
-                    HttpMethod.Post.Method,
-                    HttpMethod.Put.Method,
-                    HttpMethod.Delete.Method,
-                    HttpMethod.Patch.Method
-                    ).AllowAnyHeader();
-                });
-                options.AddPolicy("Default", policy =>
-                {
-                    policy.AllowAnyOrigin()
-                    .WithMethods(HttpMethod.Get.Method,
-                    HttpMethod.Post.Method,
-                    HttpMethod.Put.Method,
-                    HttpMethod.Delete.Method,
-                    HttpMethod.Patch.Method
-                    ).AllowAnyHeader();
-                });
-            });
+            builder.Services.ConfigureCors();
+
             //builder.Services.AddValidatorsFromAssemblyContaining<>();
 
             //builder.Services.AddFluentValidationAutoValidation(options =>
@@ -168,38 +103,10 @@ namespace ISSA_IdentityService
                 options.Configuration = builder.Configuration.GetConnectionString("RedisConnection");
             });
             _ = builder.Services.AddSingleton<IConnectionMultiplexer>(await ConnectionMultiplexer.ConnectAsync(builder.Configuration.GetConnectionString("RedisConnection")));
-            builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
-            {
-                options.SignIn.RequireConfirmedAccount = false;
-                options.Password.RequireDigit = true;
-                options.Password.RequiredLength = 6;
-                options.Password.RequireNonAlphanumeric = true;
-                options.Password.RequireUppercase = true;
-            }).AddRoleManager<RoleManager<IdentityRole>>()
-         .AddRoles<IdentityRole>()
-         .AddEntityFrameworkStores<AppDbContext>()
-         .AddDefaultTokenProviders();
-            _ = builder.Services.AddAuthentication(options =>
-            {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(options =>
-            {
-                options.RequireHttpsMetadata = false;
-                options.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuer = true,
-                    ValidateAudience = false,
-                    ValidateIssuerSigningKey = true,
-                    ValidateLifetime = true,
-                    LogValidationExceptions = true,
-                    ValidAudience = builder.Configuration["Jwt:ValidAudience"],
-                    ValidIssuer = builder.Configuration["Jwt:ValidIssuer"],
-                    IssuerSigningKey = SystemSettingModel.RSAPublicKey ?? new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:SecrectKey"])),
-                };
-            });
+
+            builder.Services.ConfigureAuthentication();
             builder.Services.AddAutoMapperServices();
+
             builder.Services.AddRouting(options =>
             {
                 options.AppendTrailingSlash = false;

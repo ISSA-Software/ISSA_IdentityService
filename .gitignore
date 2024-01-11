@@ -366,3 +366,7 @@ FodyWeavers.xsd
 /ISSA/appsettings.Development.json
 /ISSA/appsettings.json
 /ISSA/private_key.pem
+/src/ISSA_IdentityService/appsettings.Development.json
+/src/ISSA_IdentityService/appsettings.json
+/src/ISSA_IdentityService/public_key.pem
+/src/ISSA_IdentityService/private_key.pem
