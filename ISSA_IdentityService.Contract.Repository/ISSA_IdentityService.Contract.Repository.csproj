@@ -20,7 +20,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ISSA.Core\ISSA_IdentityService.Core.csproj" />
+    <ProjectReference Include="..\ISSA_IdentityService.Core\ISSA_IdentityService.Core.csproj" />
   </ItemGroup>
+
 
 </Project>
