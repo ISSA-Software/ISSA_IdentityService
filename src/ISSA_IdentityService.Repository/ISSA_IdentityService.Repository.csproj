@@ -9,14 +9,14 @@
 
 
   <ItemGroup>
-    <Folder Include="Migrations\" />
+    <ProjectReference Include="..\ISSA_IdentityService.Contract.Repository\ISSA_IdentityService.Contract.Repository.csproj" />
+    <ProjectReference Include="..\ISSA_IdentityService.Core\ISSA_IdentityService.Core.csproj" />
   </ItemGroup>
 
 
 
   <ItemGroup>
-    <ProjectReference Include="..\ISSA_IdentityService.Contract.Repository\ISSA_IdentityService.Contract.Repository.csproj" />
-    <ProjectReference Include="..\ISSA_IdentityService.Core\ISSA_IdentityService.Core.csproj" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>
