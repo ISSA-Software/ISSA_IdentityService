@@ -12,19 +12,26 @@ using ISSA_IdentityService.Core.Utils;
 namespace ISSA_IdentityService.Service.Services
 {
     [ScopedDependency(ServiceType = typeof(IAdminService))]
-    public class AdminService(IAdminRepository adminRepository, IMapper mapper, ICacheLayer<Admin> cacheLayer) : BaseService.Service, IAdminService
+    public class AdminService(IAdminRepository repository, IMapper mapper, IIdentityService service, ICacheLayer<Admin> cacheLayer) : BaseService.Service, IAdminService
     {
         public async Task<string> CreateAsync(AdminModel model, CancellationToken cancellationToken = default)
         {
             var admin = mapper.Map<Admin>(model);
-            var entity = await adminRepository.AddAsync(admin, cancellationToken);
+            var entity = await repository.AddAsync(admin, cancellationToken);
             return entity.Id;
         }
 
         public async Task<int> DeleteAsync(string id, CancellationToken cancellationToken = default)
         {
-            var affectedRows = await adminRepository.DeleteAsync(x => x.Id == id, cancellationToken);
-            return affectedRows;
+            var entity = await repository.GetSingleAsync(x => x.Id == id, cancellationToken);
+
+            if(entity != null)
+            {
+                _ = service.DeleteUserAsync(entity.ApplicationUserId);
+                var i = await repository.DeleteAsync(x => x.Id == entity.Id, cancellationToken);
+                return i;
+            }
+            return 0;
         }
 
         public Task<ICollection<Admin>> GetAllAsync(AdminQuery query, CancellationToken cancellationToken = default)
@@ -34,13 +41,13 @@ namespace ISSA_IdentityService.Service.Services
 
         public async Task<Admin?> GetByIdAsync(string id, CancellationToken cancellationToken = default)
         {
-            var admin = await adminRepository.GetSingleAsync(x => x.Id == id, cancellationToken);
+            var admin = await repository.GetSingleAsync(x => x.Id == id, cancellationToken);
             return admin;
         }
 
         public async Task<PaginatedList<Admin>> GetPaginatedAsync(AdminQuery query, CancellationToken cancellationToken = default)
         {
-            var admins = await adminRepository.GetAsync(null, cancellationToken);
+            var admins = await repository.GetAsync(x => x.IsDelete == query.IsDeleted , cancellationToken);
             var paginatedList = await admins.PaginatedListAsync(query);
             return paginatedList;
         }
@@ -48,7 +55,7 @@ namespace ISSA_IdentityService.Service.Services
         public async Task<int> UpdateAsync(string id, AdminModel model, CancellationToken cancellationToken = default)
         {
             var admin = mapper.Map<Admin>(model);
-            int i = await adminRepository.UpdateAsync(admin, cancellationToken);
+            int i = await repository.UpdateAsync(admin, cancellationToken);
             return i;
         }
     }

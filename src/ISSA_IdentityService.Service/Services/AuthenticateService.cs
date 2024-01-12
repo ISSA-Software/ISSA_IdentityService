@@ -252,7 +252,7 @@ namespace ISSA_IdentityService.Service.Services
             return token;
         }
 
-        private JwtSecurityToken? ValidateToken(string token)
+        private static JwtSecurityToken? ValidateToken(string token)
         {
             _ = new JwtSecurityTokenHandler().ValidateToken(token, new TokenValidationParameters
             {

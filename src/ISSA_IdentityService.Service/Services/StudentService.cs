@@ -12,7 +12,7 @@ using ISSA_IdentityService.Core.Utils;
 namespace ISSA_IdentityService.Service.Services
 {
     [ScopedDependency(ServiceType = typeof(IStudentService))]
-    public class StudentService(IStudentRepository repository, IMapper mapper, ICacheLayer<Student> cacheLayer) : BaseService.Service, IStudentService
+    public class StudentService(IStudentRepository repository, IMapper mapper, IIdentityService service, ICacheLayer<Student> cacheLayer) : BaseService.Service, IStudentService
     {
         public async Task<string> CreateAsync(StudentModel model, CancellationToken cancellationToken = default)
         {
@@ -23,8 +23,14 @@ namespace ISSA_IdentityService.Service.Services
 
         public async Task<int> DeleteAsync(string id, CancellationToken cancellationToken = default)
         {
-            var affectedRows = await repository.DeleteAsync(x => x.Id == id, cancellationToken);
-            return affectedRows;
+            var entity = await repository.GetSingleAsync(x => x.Id == id, cancellationToken);
+            if (entity != null)
+            {
+                _ = service.DeleteUserAsync(entity.ApplicationUserId);
+                var i = await repository.DeleteAsync(x => x.Id == entity.Id, cancellationToken);
+                return i;
+            }
+            return 0;
         }
 
         public Task<ICollection<Student>> GetAllAsync(StudentQuery query, CancellationToken cancellationToken = default)
@@ -40,7 +46,7 @@ namespace ISSA_IdentityService.Service.Services
 
         public async Task<PaginatedList<Student>> GetPaginatedAsync(StudentQuery query, CancellationToken cancellationToken = default)
         {
-            var Students = await repository.GetAsync(null, cancellationToken);
+            var Students = await repository.GetAsync(x => x.IsDelete == query.IsDeleted, cancellationToken);
             var paginatedList = await Students.PaginatedListAsync(query);
             return paginatedList;
         }
