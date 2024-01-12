@@ -15,4 +15,5 @@ public interface IBaseIdentityService
     Task<(Result Result, string UserId)> CreateUserAsync(string userName, string password);
 
     Task<int> DeleteUserAsync(string userId);
+    Task<Result> DeleteUserAsync(ApplicationUser user);
 }

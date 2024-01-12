@@ -12,6 +12,10 @@ namespace ISSA_IdentityService.Extensions
     {
         public static IServiceCollection ConfigureAuthentication(this IServiceCollection services)
         {
+            if (SystemSettingModel.Configs == null)
+            {
+                throw new Exception("Jwt:ValidIssuer is null");
+            }
             services.AddIdentity<ApplicationUser, IdentityRole>(options =>
             {
                 options.SignIn.RequireConfirmedAccount = false;
@@ -20,9 +24,9 @@ namespace ISSA_IdentityService.Extensions
                 options.Password.RequireNonAlphanumeric = true;
                 options.Password.RequireUppercase = true;
             }).AddRoleManager<RoleManager<IdentityRole>>()
-         .AddRoles<IdentityRole>()
-         .AddEntityFrameworkStores<AppDbContext>()
-         .AddDefaultTokenProviders();
+              .AddRoles<IdentityRole>()
+              .AddEntityFrameworkStores<AppDbContext>()
+              .AddDefaultTokenProviders();
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -40,7 +44,7 @@ namespace ISSA_IdentityService.Extensions
                     LogValidationExceptions = true,
                     ValidAudience = SystemSettingModel.Configs["Jwt:ValidAudience"],
                     ValidIssuer = SystemSettingModel.Configs["Jwt:ValidIssuer"],
-                    IssuerSigningKey = SystemSettingModel.RSAPublicKey ?? new SymmetricSecurityKey(Encoding.UTF8.GetBytes(SystemSettingModel.Configs["Jwt:SecrectKey"])),
+                    IssuerSigningKey = SystemSettingModel.RSAPublicKey
                 };
             });
 

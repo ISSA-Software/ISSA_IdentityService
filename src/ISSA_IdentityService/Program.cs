@@ -102,7 +102,8 @@ namespace ISSA_IdentityService
             {
                 options.Configuration = builder.Configuration.GetConnectionString("RedisConnection");
             });
-            _ = builder.Services.AddSingleton<IConnectionMultiplexer>(await ConnectionMultiplexer.ConnectAsync(builder.Configuration.GetConnectionString("RedisConnection")));
+
+            _ = builder.Services.AddSingleton<IConnectionMultiplexer>(await ConnectionMultiplexer.ConnectAsync(configuration: builder.Configuration.GetConnectionString("RedisConnection") ?? string.Empty));
 
             builder.Services.ConfigureAuthentication();
             builder.Services.AddAutoMapperServices();
@@ -161,10 +162,10 @@ namespace ISSA_IdentityService
 
     public class SlugifyParameterTransformer : IOutboundParameterTransformer
     {
-        public string? TransformOutbound(object value)
+        public string TransformOutbound(object? value)
         {
-            var name = value.ToString();
-            return name == null ? null : Regex.Replace(name, "([a-z])([A-Z])", "$1-$2").ToLower();
+            var name = value?.ToString();
+            return name == null ? string.Empty : Regex.Replace(name, "([a-z])([A-Z])", "$1-$2").ToLower();
         }
     }
 

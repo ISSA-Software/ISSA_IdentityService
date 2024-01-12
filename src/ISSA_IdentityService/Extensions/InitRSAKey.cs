@@ -8,12 +8,16 @@ namespace ISSA_IdentityService.Extensions
     {
         public static void Init()
         {
+            if (SystemSettingModel.Configs == null)
+            {
+                throw new Exception("Jwt:ValidIssuer is null");
+            }
             string private_key = "";
             string public_key = "";
             try
             {
-                private_key = File.ReadAllText(SystemSettingModel.Configs["Jwt:PrivateKey"]);
-                public_key = File.ReadAllText(SystemSettingModel.Configs["Jwt:PublicKey"]);
+                private_key = File.ReadAllText(SystemSettingModel.Configs["Jwt:PrivateKey"] ?? string.Empty);
+                public_key = File.ReadAllText(SystemSettingModel.Configs["Jwt:PublicKey"] ?? string.Empty);
                 if (private_key != "" && public_key != "")
                 {
                     var private_rsa = RSA.Create();

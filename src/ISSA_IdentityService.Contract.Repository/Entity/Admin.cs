@@ -7,6 +7,6 @@ namespace ISSA_IdentityService.Contract.Repository.Entity
     {
         [Required]
         public string ApplicationUserId { get; set; } = string.Empty;
-        public ApplicationUser? ApplicationUser { get; set; }
+        public ApplicationUser? ApplicationUser { get; set; } 
     }
 }

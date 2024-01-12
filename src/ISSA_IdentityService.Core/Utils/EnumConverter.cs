@@ -10,9 +10,9 @@ public class EnumConverter<T> : JsonConverter<T> where T : System.Enum
     public override void WriteJson(JsonWriter writer, T? value, JsonSerializer serializer)
     {
         var nameAndValue = new {
-            Name = value.ToString("g"),
-            Value = value.ToString("d"),
-            DisplayName = CoreHelper.ToSentenceCase(value.ToString("g"))
+            Name = value?.ToString("g"),
+            Value = value?.ToString("d"),
+            DisplayName = CoreHelper.ToSentenceCase(value?.ToString("g") ?? string.Empty)
         };
         var semiJson = JObject.FromObject(nameAndValue);
         semiJson.WriteTo(writer);

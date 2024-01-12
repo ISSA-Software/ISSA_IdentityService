@@ -10,6 +10,7 @@
     <ProjectReference Include="..\ISSA_IdentityService.Contract.Service\ISSA_IdentityService.Contract.Service.csproj" />
     <ProjectReference Include="..\ISSA_IdentityService.Core\ISSA_IdentityService.Core.csproj" />
     <ProjectReference Include="..\ISSA_IdentityService.Mapper\ISSA_IdentityService.Mapper.csproj" />
+    <ProjectReference Include="..\ISSA_IdentityService.Repository\ISSA_IdentityService.Repository.csproj" />
   </ItemGroup>
 
 </Project>

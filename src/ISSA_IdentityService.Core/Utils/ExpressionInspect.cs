@@ -10,9 +10,9 @@ public class ExpressionInspect : ExpressionVisitor
         VisitBinary(node);
     }
 
-    public override Expression Visit(Expression? node)
+    public override Expression? Visit(Expression? node)
     {
-        if (node.NodeType == ExpressionType.Constant)
+        if (node?.NodeType == ExpressionType.Constant)
         {
             var value = ((ConstantExpression)node).Value;
             if (value != null)
@@ -29,7 +29,10 @@ public class ExpressionInspect : ExpressionVisitor
                 }
             }
         }
+        if(node != null)
         return base.Visit(node);
+
+        return node;
     }
 
     protected override Expression VisitBinary(BinaryExpression node)
@@ -37,7 +40,7 @@ public class ExpressionInspect : ExpressionVisitor
 
         if (node.NodeType == ExpressionType.Equal)
         {
-            Expression left = Visit(node.Left);
+            Expression? left = Visit(node.Left);
             if (left != null)
             {
                 var leftnode = left as MemberExpression;

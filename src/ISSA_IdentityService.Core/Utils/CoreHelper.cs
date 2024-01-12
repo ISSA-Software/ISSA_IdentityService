@@ -8,7 +8,7 @@ using TimeZoneConverter;
 namespace ISSA_IdentityService.Core.Utils;
 public static class CoreHelper
 {
-    private static readonly IHttpContextAccessor? _contextAccessor;
+    private static readonly IHttpContextAccessor? _contextAccessor = null;
     public static HttpContext? CurrentHttpContext => Current;
 
     public static TimeZoneInfo SystemTimeZoneInfo => GetTimeZoneInfo(Formattings.TimeZone);

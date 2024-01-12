@@ -7,20 +7,31 @@ using ISSA_IdentityService.Contract.Service.Interface;
 using ISSA_IdentityService.Core.Models;
 using ISSA_IdentityService.Core.Models.Common;
 using ISSA_IdentityService.Core.QueryObject;
+using ISSA_IdentityService.Core.Utils;
 
 namespace ISSA_IdentityService.Service.Services
 {
     [ScopedDependency(ServiceType = typeof(IMentorService))]
-    public class MentorService(IMentorRepository mentorRepository, IMapper mapper, ICacheLayer<Mentor> cacheLayer) : BaseService.Service, IMentorService
+    public class MentorService(IMentorRepository repository, IMapper mapper, IIdentityService service, ICacheLayer<Mentor> cacheLayer) : BaseService.Service, IMentorService
     {
-        public Task<string> CreateAsync(MentorModel model, CancellationToken cancellationToken = default)
+        public async Task<string> CreateAsync(MentorModel model, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var Mentor = mapper.Map<Mentor>(model);
+            var entity = await repository.AddAsync(Mentor, cancellationToken);
+            return entity.Id;
         }
 
-        public Task<int> DeleteAsync(string id, CancellationToken cancellationToken = default)
+        public async Task<int> DeleteAsync(string id, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var entity = await repository.GetSingleAsync(x => x.Id == id, cancellationToken);
+
+            if (entity != null)
+            {
+                _ = service.DeleteUserAsync(entity.ApplicationUserId);
+                var i = await repository.DeleteAsync(x => x.Id == entity.Id, cancellationToken);
+                return i;
+            }
+            return 0;
         }
 
         public Task<ICollection<Mentor>> GetAllAsync(MentorQuery query, CancellationToken cancellationToken = default)
@@ -28,19 +39,24 @@ namespace ISSA_IdentityService.Service.Services
             throw new NotImplementedException();
         }
 
-        public Task<Mentor?> GetByIdAsync(string id, CancellationToken cancellationToken = default)
+        public async Task<Mentor?> GetByIdAsync(string id, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var Mentor = await repository.GetSingleAsync(x => x.Id == id, cancellationToken);
+            return Mentor;
         }
 
-        public Task<PaginatedList<Mentor>> GetPaginatedAsync(MentorQuery query, CancellationToken cancellationToken = default)
+        public async Task<PaginatedList<Mentor>> GetPaginatedAsync(MentorQuery query, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var Mentors = await repository.GetAsync(null, cancellationToken);
+            var paginatedList = await Mentors.PaginatedListAsync(query);
+            return paginatedList;
         }
 
-        public Task<int> UpdateAsync(string id, MentorModel model, CancellationToken cancellationToken = default)
+        public async Task<int> UpdateAsync(string id, MentorModel model, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var Mentor = mapper.Map<Mentor>(model);
+            int i = await repository.UpdateAsync(Mentor, cancellationToken);
+            return i;
         }
     }
 }
