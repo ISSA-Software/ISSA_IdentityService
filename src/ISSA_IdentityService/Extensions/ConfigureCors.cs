@@ -6,6 +6,10 @@ namespace ISSA_IdentityService.Extensions
     {
         public static IServiceCollection ConfigureCors(this IServiceCollection services)
         {
+            if (SystemSettingModel.Configs == null)
+            {
+                throw new Exception("Jwt:ValidIssuer is null");
+            }
             services.AddCors(options =>
             {
                 options.AddPolicy("Development", policy =>
@@ -14,7 +18,7 @@ namespace ISSA_IdentityService.Extensions
                 });
                 options.AddPolicy("Production", policy =>
                 {
-                    policy.WithOrigins(SystemSettingModel.Configs["AllowedHosts"])
+                    policy.WithOrigins(SystemSettingModel.Configs["AllowedHosts"] ?? string.Empty)
                     .WithMethods(HttpMethod.Get.Method,
                     HttpMethod.Post.Method,
                     HttpMethod.Put.Method,

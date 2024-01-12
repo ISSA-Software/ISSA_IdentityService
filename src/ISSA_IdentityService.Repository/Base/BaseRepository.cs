@@ -9,7 +9,7 @@ namespace ISSA_IdentityService.Repository.Base
 {
     public abstract class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity, new()
     {
-        protected readonly DbContext _dbContext;
+        protected readonly DbContext _dbContext = null!;
 
         private DbSet<T> _dbSet;
 
@@ -27,7 +27,9 @@ namespace ISSA_IdentityService.Repository.Base
             }
         }
 
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         protected BaseRepository(DbContext dbContext)
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         {
             _dbContext = dbContext;
         }
@@ -40,12 +42,14 @@ namespace ISSA_IdentityService.Repository.Base
             return e.Entity;
         }
 
-        public virtual async Task<int> DeleteAsync(Expression<Func<T, bool>> filter, CancellationToken cancellationToken = default)
+        public virtual async Task<int> DeleteAsync(Expression<Func<T, bool>> filter, CancellationToken cancellationToken = default, bool isHardDelete = false)
         {
-            //var i = await DbSet.Where(filter).ExecuteDeleteAsync(cancellationToken);
-            var i = await DbSet.Where(filter)
-                .ExecuteUpdateAsync(x => x.SetProperty(x => x.IsDelete, true),
-               cancellationToken: cancellationToken);
+            if(isHardDelete)
+            {
+                var k = await DbSet.Where(filter).ExecuteDeleteAsync(cancellationToken);
+                return k;
+            }
+            var i = await DbSet.Where(filter).ExecuteUpdateAsync(x => x.SetProperty(x => x.IsDelete, true), cancellationToken: cancellationToken);
             return i;
         }
 

@@ -44,7 +44,7 @@ public class ObjHelper
             {
                 if (underlyingType == typeof(string))
                 {
-                    return (T)(object)obj.ToString();
+                    return (T?)(object?)obj.ToString();
                 }
 
                 return (T)Convert.ChangeType(obj, underlyingType);
@@ -52,12 +52,12 @@ public class ObjHelper
 
             if (typeFromHandle == typeof(string))
             {
-                return (T)(object)obj.ToString();
+                return (T?)(object?)obj.ToString();
             }
 
             if (typeFromHandle.IsPrimitive)
             {
-                return (T)Convert.ChangeType(obj.ToString(), typeFromHandle);
+                return (T?)Convert.ChangeType(obj.ToString(), typeFromHandle);
             }
 
             return (T)Convert.ChangeType(obj, typeFromHandle);
@@ -66,7 +66,7 @@ public class ObjHelper
         return default(T);
     }
 
-    public static bool TryConvertTo<T>(object obj, T defaultValue, out T value)
+    public static bool TryConvertTo<T>(object obj, T defaultValue, out T? value)
     {
         try
         {
@@ -75,7 +75,7 @@ public class ObjHelper
         }
         catch
         {
-            value = ((defaultValue == null) ? default(T) : defaultValue);
+            value = ((defaultValue == null) ? default : defaultValue);
             return false;
         }
     }

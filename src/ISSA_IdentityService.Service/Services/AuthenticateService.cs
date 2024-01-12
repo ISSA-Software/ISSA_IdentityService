@@ -203,6 +203,10 @@ namespace ISSA_IdentityService.Service.Services
             };
 
             var signingCredentials = new SigningCredentials(SystemSettingModel.RSAPrivateKey, SecurityAlgorithms.RsaSha512);
+            if (SystemSettingModel.Configs == null)
+            {
+                throw new Exception("Jwt:ValidIssuer is null");
+            }
             var jwtSecurityToken = new JwtSecurityToken(
                 issuer: SystemSettingModel.Configs["Jwt:ValidIssuer"],
                 audience: SystemSettingModel.Configs["Jwt:ValidAudience"],
@@ -242,6 +246,10 @@ namespace ISSA_IdentityService.Service.Services
             };
             claims.AddRange(userClaimsAndRoleClaims);
             var signingCredentials = new SigningCredentials(SystemSettingModel.RSAPrivateKey, SecurityAlgorithms.RsaSha512);
+            if (SystemSettingModel.Configs == null)
+            {
+                throw new Exception("Jwt:ValidIssuer is null");
+            }
             var jwtSecurityToken = new JwtSecurityToken(
                                issuer: SystemSettingModel.Configs["Jwt:ValidIssuer"],
                                audience: SystemSettingModel.Configs["Jwt:ValidAudience"],
@@ -254,6 +262,10 @@ namespace ISSA_IdentityService.Service.Services
 
         private static JwtSecurityToken? ValidateToken(string token)
         {
+            if (SystemSettingModel.Configs == null)
+            {
+                throw new Exception("Jwt:ValidIssuer is null");
+            }
             _ = new JwtSecurityTokenHandler().ValidateToken(token, new TokenValidationParameters
             {
                 ValidateIssuer = true,
