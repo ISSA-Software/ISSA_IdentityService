@@ -7,20 +7,24 @@ using ISSA_IdentityService.Contract.Service.Interface;
 using ISSA_IdentityService.Core.Models;
 using ISSA_IdentityService.Core.Models.Common;
 using ISSA_IdentityService.Core.QueryObject;
+using ISSA_IdentityService.Core.Utils;
 
 namespace ISSA_IdentityService.Service.Services
 {
     [ScopedDependency(ServiceType = typeof(IAdminService))]
     public class AdminService(IAdminRepository adminRepository, IMapper mapper, ICacheLayer<Admin> cacheLayer) : BaseService.Service, IAdminService
     {
-        public Task<string> CreateAsync(AdminModel model, CancellationToken cancellationToken = default)
+        public async Task<string> CreateAsync(AdminModel model, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var admin = mapper.Map<Admin>(model);
+            var entity = await adminRepository.AddAsync(admin, cancellationToken);
+            return entity.Id;
         }
 
-        public Task<int> DeleteAsync(string id, CancellationToken cancellationToken = default)
+        public async Task<int> DeleteAsync(string id, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var affectedRows = await adminRepository.DeleteAsync(x => x.Id == id, cancellationToken);
+            return affectedRows;
         }
 
         public Task<ICollection<Admin>> GetAllAsync(AdminQuery query, CancellationToken cancellationToken = default)
@@ -28,19 +32,24 @@ namespace ISSA_IdentityService.Service.Services
             throw new NotImplementedException();
         }
 
-        public Task<Admin?> GetByIdAsync(string id, CancellationToken cancellationToken = default)
+        public async Task<Admin?> GetByIdAsync(string id, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var admin = await adminRepository.GetSingleAsync(x => x.Id == id, cancellationToken);
+            return admin;
         }
 
-        public Task<PaginatedList<Admin>> GetPaginatedAsync(AdminQuery query, CancellationToken cancellationToken = default)
+        public async Task<PaginatedList<Admin>> GetPaginatedAsync(AdminQuery query, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var admins = await adminRepository.GetAsync(null, cancellationToken);
+            var paginatedList = await admins.PaginatedListAsync(query);
+            return paginatedList;
         }
 
-        public Task<int> UpdateAsync(string id, AdminModel model, CancellationToken cancellationToken = default)
+        public async Task<int> UpdateAsync(string id, AdminModel model, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var admin = mapper.Map<Admin>(model);
+            int i = await adminRepository.UpdateAsync(admin, cancellationToken);
+            return i;
         }
     }
 }
