@@ -14,12 +14,14 @@ namespace ISSA_IdentityService.Controllers
         {
             try
             {
-                var model = new AuthenticateModel();
-                model.IdToken = request.IdToken;
-                model.RefreshToken = request.RefreshToken;
-                model.IsAnonymous = request.IsAnonymous;
-                //model.SessionId = HttpContext.Session.Id;  
-                model.IPAdress = HttpContext.Connection.RemoteIpAddress?.ToString();
+                var model = new AuthenticateModel
+                {
+                    IdToken = request.IdToken,
+                    RefreshToken = request.RefreshToken,
+                    IsAnonymous = request.IsAnonymous,
+                    //SessionId = HttpContext.Session.Id,
+                    IPAdress = HttpContext.Connection.RemoteIpAddress?.ToString()
+                };
                 //HttpContext.Session.SetString("SessionId", "Registerd device");
                 HttpContext.Request.Headers.TryGetValue("Sec-CH-UA", out StringValues browser);
                 HttpContext.Request.Headers.TryGetValue("Sec-CH-UA-Platform", out StringValues os);
@@ -40,12 +42,14 @@ namespace ISSA_IdentityService.Controllers
         {
             try
             {
-                var model = new AuthenticateModel();
-                model.IdToken = request.IdToken;
-                model.RefreshToken = request.RefreshToken;
-                model.IsAnonymous = request.IsAnonymous;
-                //model.SessionId = HttpContext.Session.Id;  
-                model.IPAdress = HttpContext.Connection.RemoteIpAddress?.ToString();
+                var model = new AuthenticateModel
+                {
+                    IdToken = request.IdToken,
+                    RefreshToken = request.RefreshToken,
+                    IsAnonymous = request.IsAnonymous,
+                    //SessionId = HttpContext.Session.Id,
+                    IPAdress = HttpContext.Connection.RemoteIpAddress?.ToString()
+                };
                 //HttpContext.Session.SetString("SessionId", "Registerd device");
                 HttpContext.Request.Headers.TryGetValue("Sec-CH-UA", out StringValues browser);
                 HttpContext.Request.Headers.TryGetValue("Sec-CH-UA-Platform", out StringValues os);

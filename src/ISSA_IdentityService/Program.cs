@@ -143,7 +143,7 @@ namespace ISSA_IdentityService
             app.UseSwaggerUI(
                 options =>
                 {
-                    options.SwaggerEndpoint("/swagger/v1/swagger.json", "ISSA_IdentityService v1");
+                    options.SwaggerEndpoint("/swagger/v1/swagger.json", "ISSA IdentityService v1");
                     options.RoutePrefix = "swagger/api/v1";
                 });
             IdentityModelEventSource.ShowPII = true;
