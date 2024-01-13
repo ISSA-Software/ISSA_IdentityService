@@ -1,5 +1,4 @@
-﻿using FirebaseAdmin;
-using FirebaseAdmin.Auth;
+﻿using FirebaseAdmin.Auth;
 using IdentityModel;
 using Invedia.DI.Attributes;
 using ISSA_IdentityService.Contract.Repository.Entity;
@@ -38,11 +37,11 @@ namespace ISSA_IdentityService.Service.Services
             ApplicationUser? applicationUser = null;
             if (!model.IdToken.IsNullOrEmpty())
             {
-                decodedToken = await _firebaseAuth.VerifyIdTokenAsync(model.IdToken);
+                decodedToken = await _firebaseAuth.VerifyIdTokenAsync(model.IdToken, cancellationToken);
                 if (decodedToken != null)
                 {
                     uid = decodedToken.Uid;
-                    userRecord = await _firebaseAuth.GetUserAsync(uid);
+                    userRecord = await _firebaseAuth.GetUserAsync(uid, cancellationToken);
                 }
             }
 
@@ -59,15 +58,15 @@ namespace ISSA_IdentityService.Service.Services
                     }
                     if (!userRecord.PhoneNumber.IsNullOrEmpty())
                     {
-                        await identityService.SetVerifiedPhoneNumberAsync(applicationUser, userRecord.PhoneNumber);
+                        _ = identityService.SetVerifiedPhoneNumberAsync(applicationUser, userRecord.PhoneNumber);
                     }
                     if (!userRecord.DisplayName.IsNullOrEmpty())
                     {
-                        await identityService.SetUserFullNameAsync(applicationUser, userRecord.DisplayName);
+                        _ = identityService.SetUserFullNameAsync(applicationUser, userRecord.DisplayName);
                     }
                     if (!userRecord.PhotoUrl.IsNullOrEmpty())
                     {
-                        await identityService.SetUserAvatarUrlAsync(applicationUser, userRecord.PhotoUrl);
+                        _ = identityService.SetUserAvatarUrlAsync(applicationUser, userRecord.PhotoUrl);
                     }
                 }
 

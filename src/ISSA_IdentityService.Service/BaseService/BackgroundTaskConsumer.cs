@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using ISSA_IdentityService.Contract.Service.Interface;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 namespace ISSA_IdentityService.Service.BaseService;
@@ -20,8 +21,8 @@ public class BackgroundTaskConsumer : BackgroundService
     {
 
         using var scope = Services.CreateScope();
-        //var scopedProcessingService = scope.ServiceProvider.GetRequiredService<ICancelTransactionService>();
-        //await scopedProcessingService.DoWork(stoppingToken);
+        var scopedProcessingService = scope.ServiceProvider.GetRequiredService<IClearExpiredRT>();
+        await scopedProcessingService.ClearExpiredRTAsync(stoppingToken);
     }
 
     public override async Task StopAsync(CancellationToken stoppingToken)

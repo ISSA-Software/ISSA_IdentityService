@@ -22,6 +22,8 @@ namespace ISSA_IdentityService
     {
         public static async Task Main(string[] args)
         {
+            ConfigureLogginExtension.ConfigureLogging();
+
             var builder = WebApplication.CreateBuilder(args);
 
             SystemSettingModel.Environment = builder.Environment.EnvironmentName;
@@ -33,7 +35,7 @@ namespace ISSA_IdentityService
 
 
             // Add services to the container.
-            builder.Host.UseSerilog((hostingContext, loggerConfiguration) => loggerConfiguration.ReadFrom.Configuration(hostingContext.Configuration).Enrich.FromLogContext().WriteTo.Console());
+            builder.Host.UseSerilog();
 
             InitRSAKey.Init();
 
@@ -141,7 +143,7 @@ namespace ISSA_IdentityService
             app.UseSwaggerUI(
                 options =>
                 {
-                    options.SwaggerEndpoint("/swagger/v1/swagger.json", "ISSA_IdentityService v1");
+                    options.SwaggerEndpoint("/swagger/v1/swagger.json", "ISSA IdentityService v1");
                     options.RoutePrefix = "swagger/api/v1";
                 });
             IdentityModelEventSource.ShowPII = true;
