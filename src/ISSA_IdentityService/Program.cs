@@ -22,6 +22,8 @@ namespace ISSA_IdentityService
     {
         public static async Task Main(string[] args)
         {
+            ConfigureLogginExtension.ConfigureLogging();
+
             var builder = WebApplication.CreateBuilder(args);
 
             SystemSettingModel.Environment = builder.Environment.EnvironmentName;
@@ -33,7 +35,7 @@ namespace ISSA_IdentityService
 
 
             // Add services to the container.
-            builder.Host.UseSerilog((hostingContext, loggerConfiguration) => loggerConfiguration.ReadFrom.Configuration(hostingContext.Configuration).Enrich.FromLogContext().WriteTo.Console());
+            builder.Host.UseSerilog();
 
             InitRSAKey.Init();
 
