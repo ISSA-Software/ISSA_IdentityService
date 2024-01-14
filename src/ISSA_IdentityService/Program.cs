@@ -3,18 +3,16 @@ using ISSA_IdentityService.Core.Config;
 using ISSA_IdentityService.Repository.Infrastructure;
 using ISSA_IdentityService.Service.BaseService;
 using ISSA_IdentityService.Extensions;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
-using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Logging;
-using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using Serilog;
 using StackExchange.Redis;
-using System.IO.Compression;
 using System.Text.RegularExpressions;
+using Grpc.AspNetCore.Server;
+using Grpc.Net.Compression;
 
 namespace ISSA_IdentityService
 {
@@ -32,15 +30,11 @@ namespace ISSA_IdentityService
                .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", false, true)
                .AddUserSecrets<Program>(true, false)
                .Build();
-
-
-            // Add services to the container.
             builder.Host.UseSerilog();
 
             InitRSAKey.Init();
 
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-
             builder.Services.ConfigureCors();
 
             //builder.Services.AddValidatorsFromAssemblyContaining<>();
@@ -58,35 +52,21 @@ namespace ISSA_IdentityService
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             });
 
+            builder.Services.AddGrpc().AddServiceOptions<GrpcServiceOptions>(options =>
+            {
+                options.MaxReceiveMessageSize = 10 * 1024 * 1024;
+                options.MaxSendMessageSize = 10 * 1024 * 1024;
+                options.EnableDetailedErrors = true;
+                options.ResponseCompressionLevel = System.IO.Compression.CompressionLevel.Optimal;
+                options.CompressionProviders.Add(new GzipCompressionProvider(System.IO.Compression.CompressionLevel.Optimal));
+                options.ResponseCompressionAlgorithm = "gzip";
+            }).AddJsonTranscoding();
+            builder.Services.AddGrpcReflection();
+
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddHttpContextAccessor();
             builder.Services.AddHealthChecks();
-            builder.Services.AddSwaggerGen(options =>
-            {
-                options.SwaggerDoc("v1", new OpenApiInfo { Title = "ISSA", Version = "v1" });
-                var jwtSecurityScheme = new OpenApiSecurityScheme
-                {
-                    BearerFormat = "JWT",
-                    Name = "JWT Authentication",
-                    In = ParameterLocation.Header,
-                    Type = SecuritySchemeType.Http,
-                    Scheme = JwtBearerDefaults.AuthenticationScheme,
-                    Description = "Put **_ONLY_** your JWT Bearer token on textbox below!",
-
-                    Reference = new OpenApiReference
-                    {
-                        Id = JwtBearerDefaults.AuthenticationScheme,
-                        Type = ReferenceType.SecurityScheme
-                    }
-                };
-
-                options.AddSecurityDefinition(jwtSecurityScheme.Reference.Id, jwtSecurityScheme);
-
-                options.AddSecurityRequirement(new OpenApiSecurityRequirement
-                {
-                    { jwtSecurityScheme, Array.Empty<string>() }
-                });
-            });
+            builder.Services.ConfigureSwagger();
 
             //builder.Services.AddSingleton(FirebaseApp.Create(new AppOptions()
             //{
@@ -105,37 +85,22 @@ namespace ISSA_IdentityService
                 options.Configuration = builder.Configuration.GetConnectionString("RedisConnection");
             });
 
-            _ = builder.Services.AddSingleton<IConnectionMultiplexer>(await ConnectionMultiplexer.ConnectAsync(configuration: builder.Configuration.GetConnectionString("RedisConnection") ?? string.Empty));
+            builder.Services.AddSingleton<IConnectionMultiplexer>(await ConnectionMultiplexer.ConnectAsync(configuration: builder.Configuration.GetConnectionString("RedisConnection") ?? string.Empty));
 
-            builder.Services.ConfigureAuthentication();
+            builder.Services.ConfigureJwtAuth();
+            builder.Services.ConfigureIdentity();
             builder.Services.AddAutoMapperServices();
-
             builder.Services.AddRouting(options =>
             {
                 options.AppendTrailingSlash = false;
             });
-
-            _ = builder.Services.AddSystemSetting(builder.Configuration.GetSection("SystemSetting").Get<SystemSettingModel>());
+            builder.Services.AddSystemSetting(builder.Configuration.GetSection("SystemSetting").Get<SystemSettingModel>());
             builder.Services.Configure<DataProtectionTokenProviderOptions>(opt => opt.TokenLifespan = TimeSpan.FromMinutes(30));
             builder.Services.AddDI();
             builder.Services.PrintServiceAddedToConsole();
-            builder.Services.Configure<GzipCompressionProviderOptions>(options =>
-            {
-                options.Level = CompressionLevel.Optimal;
-            });
-            builder.Services.Configure<BrotliCompressionProviderOptions>(options =>
-            {
-                options.Level = CompressionLevel.Optimal;
-            });
-            builder.Services.AddResponseCompression(options =>
-            {
-                options.EnableForHttps = true;
-                options.Providers.Add<GzipCompressionProvider>();
-                options.Providers.Add<BrotliCompressionProvider>();
-            });
-
+            builder.Services.ConfigureResponseCompression();
             builder.Services.AddHostedService<BackgroundTaskConsumer>();
-
+            builder.Services.AddResponseCaching();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -152,12 +117,15 @@ namespace ISSA_IdentityService
             app.UseCors("Default");
             app.UseHttpsRedirection();
             app.UseSerilogRequestLogging();
-            app.UseAuthentication();
             app.MapControllers();
             app.UseRouting();
             //app.UseIdentityServer();
+            app.UseAuthentication();
             app.UseAuthorization();
             app.UseResponseCompression();
+            app.MapGrpcReflectionService();
+            app.UseHealthChecks("/health");
+            app.UseResponseCaching();
             app.Run();
         }
     }

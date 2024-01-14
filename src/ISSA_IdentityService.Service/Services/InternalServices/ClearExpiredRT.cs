@@ -1,31 +1,32 @@
-﻿using ISSA_IdentityService.Contract.Repository.Interface;
+﻿using Invedia.DI.Attributes;
+using ISSA_IdentityService.Contract.Repository.Interface;
 using ISSA_IdentityService.Contract.Service.Interface;
-using Serilog;
+using Microsoft.Extensions.Logging;
 
-namespace ISSA_IdentityService.Service.Services
+namespace ISSA_IdentityService.Service.Services.InternalServices
 {
-    public class ClearExpiredRT(IRefreshTokenRepository repository, ILogger logger) : IClearExpiredRT
+    [ScopedDependency(ServiceType = typeof(IClearExpiredRT))]
+    public class ClearExpiredRT(IRefreshTokenRepository repository, ILogger<ClearExpiredRT> logger) : IClearExpiredRT
     {
 
         public async Task ClearExpiredRTAsync(CancellationToken cancellationToken = default)
         {
-           while (!cancellationToken.IsCancellationRequested)
+            while (!cancellationToken.IsCancellationRequested)
             {
                 try
                 {
                     var result = await repository.DeleteAsync(x => x.ExpiredAt < DateTime.Now, cancellationToken, true);
                     if (result > 0)
                     {
-                        logger.Information("{result} refresh tokens cleared", result);
+                        logger.LogInformation("{result} refresh tokens cleared", result);
                     }
                 }
                 catch (Exception ex)
                 {
-                    logger.Error(ex, "ClearExpiredRTAsync: {ex}", ex.Message);
+                    logger.LogError(ex, "ClearExpiredRTAsync: {ex}", ex.Message);
                 }
                 await Task.Delay(TimeSpan.FromHours(12), cancellationToken);
             }
         }
     }
 }
- 

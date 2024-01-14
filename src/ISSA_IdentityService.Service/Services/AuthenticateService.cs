@@ -23,7 +23,6 @@ namespace ISSA_IdentityService.Service.Services
 
         private readonly FirebaseAuth _firebaseAuth = FirebaseAuth.DefaultInstance;
 
-
         public async Task<AuthenticateResponse?> AuthenticateAsync(AuthenticateModel model, CancellationToken cancellationToken = default)
         {
             if (model.IdToken == null)
