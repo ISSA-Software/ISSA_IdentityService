@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+option csharp_namespace = "ISSA_IdentityService.Protos.Admin";
+
+import "protos/admin/admin_query.proto";
+import "protos/admin/admin_command.proto";
+import "protos/admin/admin.proto";
+
+service AdminService {
+	rpc Get (GetQuery) returns (GetResponse);
+	rpc GetPagi (GetPagiQuery) returns (GetPagiResponse);
+	rpc Create (CreateAdminCommand) returns ( CreateAdminResponse );
+	rpc Update (UpdateAdminCommand) returns ( UpdateAdminResponse );
+	rpc Delete (DeleteAdminCommand) returns ( DeleteAdminResponse );
+}

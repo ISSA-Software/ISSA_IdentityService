@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+option csharp_namespace = "ISSA_IdentityService.Protos.Admin";
+
+import "protos/admin/admin.proto";
+import "google/protobuf/wrappers.proto";
+
+
+message GetPagiResponse
+{
+
+	repeated Admin items = 1;
+	int32 total_pages = 2;
+	int32 page_number = 3;
+	int32 total_count = 4;
+}
+
+message GetResponse
+{
+	Admin admin = 1;
+	optional string error = 2;
+}
+
+message GetQuery
+{
+	string id = 1;
+}
+
+message GetPagiQuery
+{
+	optional int32 page = 1;
+	optional int32 limit = 2;
+	google.protobuf.BoolValue is_deleted = 3;
+}

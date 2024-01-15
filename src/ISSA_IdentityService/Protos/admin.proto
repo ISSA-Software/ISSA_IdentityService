@@ -1,7 +1,0 @@
-syntax = "proto3";
-
-option csharp_namespace = "ISSA_IdentityService.Protos";
-
-import "protos/application_user.proto";
-
-
