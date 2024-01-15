@@ -6,14 +6,14 @@ namespace ISSA_IdentityService.Services
 {
     public class AdminRPCService : AdminServiceBase
     {
-        public override Task<GetResponse> Get(GetQuery request, ServerCallContext context)
+        public override Task<GetResponse> GetById(GetQuery request, ServerCallContext context)
         {
-            return base.Get(request, context);
+            return base.GetById(request, context);
         }
 
-        public override Task<GetPagiResponse> GetPagi(GetPagiQuery request, ServerCallContext context)
+        public override Task<GetPagiResponse> Get(GetPagiQuery request, ServerCallContext context)
         {
-            return base.GetPagi(request, context);
+            return base.Get(request, context);
         }
 
         public override Task<CreateAdminResponse> Create(CreateAdminCommand request, ServerCallContext context)

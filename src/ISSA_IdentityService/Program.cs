@@ -62,7 +62,7 @@ namespace ISSA_IdentityService
                 options.ResponseCompressionAlgorithm = "gzip";
             }).AddJsonTranscoding();
             builder.Services.AddGrpcReflection();
-
+            //builder.Services.AddGrpcSwagger();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddHttpContextAccessor();
             builder.Services.AddHealthChecks();

@@ -8,11 +8,14 @@ import "google/protobuf/wrappers.proto";
 
 message GetPagiResponse
 {
-
-	repeated Admin items = 1;
-	int32 total_pages = 2;
-	int32 page_number = 3;
-	int32 total_count = 4;
+	message AdminPagi
+	{
+		repeated Admin items = 1;
+		int32 total_pages = 2;
+		int32 page_number = 3;
+		int32 total_count = 4;
+	}
+	optional string error = 1;
 }
 
 message GetResponse

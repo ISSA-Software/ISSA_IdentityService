@@ -7,8 +7,8 @@ import "protos/admin/admin_command.proto";
 import "protos/admin/admin.proto";
 
 service AdminService {
-	rpc Get (GetQuery) returns (GetResponse);
-	rpc GetPagi (GetPagiQuery) returns (GetPagiResponse);
+	rpc GetById (GetQuery) returns (GetResponse);
+	rpc Get (GetPagiQuery) returns (GetPagiResponse);
 	rpc Create (CreateAdminCommand) returns ( CreateAdminResponse );
 	rpc Update (UpdateAdminCommand) returns ( UpdateAdminResponse );
 	rpc Delete (DeleteAdminCommand) returns ( DeleteAdminResponse );

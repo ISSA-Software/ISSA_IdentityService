@@ -21,14 +21,17 @@ message UpdateAdminCommand
 message CreateAdminResponse
 {
 	string id = 1;
+	optional string error = 2;
 }
 
 message DeleteAdminResponse
 {
 	int32 affected_rows = 1;
+	optional string error = 2;
 }
 
 message UpdateAdminResponse
 {
 	int32 affected_rows = 1;
+	optional string error = 2;
 }
