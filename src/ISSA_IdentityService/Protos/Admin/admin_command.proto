@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+option csharp_namespace = "ISSA_IdentityService.Protos.Admin";
+
+message CreateAdminCommand
+{
+	string application_user_id = 1;
+}
+
+message DeleteAdminCommand
+{
+	string id = 1;
+}
+
+message UpdateAdminCommand
+{
+	string id = 1;
+	string application_user_id = 2;
+}
+
+message CreateAdminResponse
+{
+	string id = 1;
+}
+
+message DeleteAdminResponse
+{
+	int32 affected_rows = 1;
+}
+
+message UpdateAdminResponse
+{
+	int32 affected_rows = 1;
+}
