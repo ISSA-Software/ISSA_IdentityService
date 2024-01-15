@@ -117,6 +117,8 @@ namespace ISSA_IdentityService
             app.UseCors("Default");
             app.UseHttpsRedirection();
             app.UseSerilogRequestLogging();
+            app.MapGrpcService<Services.AdminRPCService>();
+
             app.MapControllers();
             app.UseRouting();
             //app.UseIdentityServer();

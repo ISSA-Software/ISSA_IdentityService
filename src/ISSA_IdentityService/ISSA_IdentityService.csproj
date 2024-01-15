@@ -14,6 +14,7 @@
     <None Remove="Protos\Admin\admin_query.proto" />
     <None Remove="Protos\Admin\admin_service.proto" />
     <None Remove="protos\application_user.proto" />
+    <None Remove="Protos\Common\application_user.proto" />
   </ItemGroup>
 
   <ItemGroup>

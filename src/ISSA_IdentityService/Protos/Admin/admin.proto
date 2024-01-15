@@ -4,7 +4,7 @@ option csharp_namespace = "ISSA_IdentityService.Protos.Admin";
 
 
 import "google/protobuf/timestamp.proto";
-import "protos/common/application_user.proto";
+import "Protos/Common/application_user.proto";
 
 message Admin
 {

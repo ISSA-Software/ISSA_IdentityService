@@ -2,7 +2,7 @@ syntax = "proto3";
 
 option csharp_namespace = "ISSA_IdentityService.Protos.Admin";
 
-import "protos/admin/admin.proto";
+import "Protos/Admin/admin.proto";
 import "google/protobuf/wrappers.proto";
 
 

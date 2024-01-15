@@ -1,4 +1,5 @@
-﻿using Grpc.Core;
+﻿using Google.Protobuf.WellKnownTypes;
+using Grpc.Core;
 using ISSA_IdentityService.Protos.Admin;
 using static ISSA_IdentityService.Protos.Admin.AdminService;
 
@@ -8,27 +9,27 @@ namespace ISSA_IdentityService.Services
     {
         public override Task<GetResponse> GetById(GetQuery request, ServerCallContext context)
         {
-            return base.GetById(request, context);
+            return Task.FromResult(new GetResponse()
+            {
+                Admin = new()
+                {
+                    ApplicationUser = new()
+                    {
+                        Id = request.Id,
+                        Username = "test",
+                        Email = "",
+                        PhoneNumber = "",
+                      
+                    },
+                    CreatedTime = DateTime.UtcNow.ToTimestamp(),
+                    IsDeleted = false,
+                    Id = request.Id,
+                    ApplicationUserId = request.Id,
+                }
+
+            });
         }
 
-        public override Task<GetPagiResponse> Get(GetPagiQuery request, ServerCallContext context)
-        {
-            return base.Get(request, context);
-        }
-
-        public override Task<CreateAdminResponse> Create(CreateAdminCommand request, ServerCallContext context)
-        {
-            return base.Create(request, context);
-        }
-
-        public override Task<UpdateAdminResponse> Update(UpdateAdminCommand request, ServerCallContext context)
-        {
-            return base.Update(request, context);
-        }
-
-        public override Task<DeleteAdminResponse> Delete(DeleteAdminCommand request, ServerCallContext context)
-        {
-            return base.Delete(request, context);
-        }
+      
     }
 }
