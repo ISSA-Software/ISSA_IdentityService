@@ -1,7 +1,6 @@
 using Invedia.DI;
 using ISSA_IdentityService.Core.Config;
 using ISSA_IdentityService.Repository.Infrastructure;
-using ISSA_IdentityService.Service.BaseService;
 using ISSA_IdentityService.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
@@ -13,6 +12,7 @@ using StackExchange.Redis;
 using System.Text.RegularExpressions;
 using Grpc.AspNetCore.Server;
 using Grpc.Net.Compression;
+using ISSA_IdentityService.Service.Services.InternalServices;
 
 namespace ISSA_IdentityService
 {

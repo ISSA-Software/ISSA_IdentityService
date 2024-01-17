@@ -1,37 +1,36 @@
 ﻿using Confluent.Kafka;
+using ISSA_IdentityService.Contract.Service.Interface.InternalService;
 using ISSA_IdentityService.Core.Config;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace ISSA_IdentityService.Service.BaseService
+namespace ISSA_IdentityService.Service.Services.InternalServices.Kafka
 {
-    public class KafkaMessageConsumer : BackgroundService
+    public class KafkaConsumer : BackgroundService, IKafkaConsumer
     {
         private readonly IConsumer<Ignore, string> _consumer;
+        private readonly ILogger<KafkaConsumer> _logger;
 
-        private readonly ILogger<KafkaMessageConsumer> _logger;
-
-        public KafkaMessageConsumer( ILogger<KafkaMessageConsumer> logger)
+        public KafkaConsumer(ILogger<KafkaConsumer> logger)
         {
             _logger = logger;
-
             var consumerConfig = new ConsumerConfig
             {
                 BootstrapServers = SystemSettingModel.Configs?["Kafka:BootstrapServers"],
                 GroupId = "IdentityConsumerGroup",
                 AutoOffsetReset = AutoOffsetReset.Earliest
             };
-
             _consumer = new ConsumerBuilder<Ignore, string>(consumerConfig).Build();
         }
 
-        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+
+        public async Task Consume(CancellationToken cancellationToken = default)
         {
             _consumer.Subscribe("IdentityUpdate");
-            while (!stoppingToken.IsCancellationRequested)
+            while (!cancellationToken.IsCancellationRequested)
             {
-                ProcessKafkaMessage(stoppingToken);
-                await Task.Delay(TimeSpan.FromSeconds(30), stoppingToken);
+                ProcessKafkaMessage(cancellationToken);
+                await Task.Delay(TimeSpan.FromSeconds(30), cancellationToken);
             }
             _consumer.Close();
         }
@@ -47,6 +46,11 @@ namespace ISSA_IdentityService.Service.BaseService
             {
                 _logger.LogError($"Error processing Kafka message: {ex.Message}");
             }
+        }
+
+        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+        {
+            await Consume(stoppingToken);
         }
     }
 }
