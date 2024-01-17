@@ -1,4 +1,4 @@
-﻿using ISSA_IdentityService.Contract.Service.Interface;
+﻿using ISSA_IdentityService.Contract.Service.Interface.InternalService;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 

@@ -1,4 +1,4 @@
-﻿namespace ISSA_IdentityService.Contract.Service.Interface
+﻿namespace ISSA_IdentityService.Contract.Service.Interface.InternalService
 {
     public interface IClearExpiredRT
     {
