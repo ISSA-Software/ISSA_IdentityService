@@ -2,6 +2,6 @@
 {
     public class AdminModel
     {
-
+        public string ApplicationUserId { get; set; } = string.Empty;
     }
 }

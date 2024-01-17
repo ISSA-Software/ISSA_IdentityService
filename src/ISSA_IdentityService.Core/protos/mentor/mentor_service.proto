@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+option csharp_namespace = "ISSA_IdentityService.Core.Protos.Mentor";
+
+import "protos/mentor/mentor_query.proto";
+import "protos/mentor/mentor_command.proto";
+import "google/api/annotations.proto";
+
+service MentorService {
+	rpc GetById (GetQuery) returns ( GetMentorResponse )
+	{
+		option (google.api.http) = {
+			get: "/api/mentor/{id}"
+		};
+	}
+	rpc Get (GetPagiQuery) returns ( GetMentorsPagiResponse )
+	{
+		option (google.api.http) = {
+			get: "/api/mentor"
+		};
+	}
+	rpc Create (CreateMentorCommand) returns ( CreateMentorResponse )
+	{
+		option (google.api.http) = {
+			post: "/api/mentor"
+			body: "*"
+		};
+	}
+	rpc Update (UpdateMentorCommand) returns ( UpdateMentorResponse )
+	{
+		option (google.api.http) = {
+			put: "/api/mentor"
+			body: "*"
+		};
+	}
+	rpc Delete (DeleteMentorCommand) returns ( DeleteMentorResponse )
+	{
+		option (google.api.http) = {
+			delete: "/api/mentor/{id}"
+		};
+	}
+}

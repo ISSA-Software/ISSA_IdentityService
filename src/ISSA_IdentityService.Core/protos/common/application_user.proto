@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+option csharp_namespace = "ISSA_IdentityService.Core.Protos";
+
+import "google/protobuf/timestamp.proto";
+
+message ApplicationUser
+{
+	string id = 1;
+	optional string user_name = 2;
+	optional string email = 3;
+	optional string password_hash = 4;
+	optional string normalized_user_name = 5;
+	optional string normalized_email = 6;
+	bool email_confirmed = 7;
+	optional string security_stamp = 8;
+	optional string concurrency_stamp = 9;
+	optional string phone_number = 10;
+	bool phone_number_confirmed = 11;
+	bool two_factor_enabled = 12;
+	optional google.protobuf.Timestamp lockout_end = 13;
+	bool lockout_enabled = 14;
+	int32 access_failed_count = 15;
+	optional string name = 16;
+	optional string image_url = 17;
+	bool is_deleted = 18;
+	google.protobuf.Timestamp created_time = 19;
+	optional google.protobuf.Timestamp updated_time = 20;
+}

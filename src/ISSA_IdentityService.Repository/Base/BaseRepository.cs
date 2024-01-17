@@ -57,7 +57,7 @@ namespace ISSA_IdentityService.Repository.Base
         {
             return await Task.Run(() =>
             {
-                var query = DbSet.AsNoTracking();
+                var query = DbSet.AsQueryable();
                 if (filter != null)
                 {
                     query = query.Where(filter);
@@ -66,13 +66,13 @@ namespace ISSA_IdentityService.Repository.Base
                 {
                     query = includes.Aggregate(query, (current, include) => current.Include(include));
                 }
-                return query;
+                return query.AsNoTracking();
             }); ;
         }
 
         public virtual async Task<T?> GetSingleAsync(Expression<Func<T, bool>>? filter = null, CancellationToken cancellationToken = default, params Expression<Func<T, object>>[]? includes)
         {
-            var query = DbSet.AsNoTracking();
+            var query = DbSet.AsQueryable();
             if (filter != null)
             {
                 query = query.Where(filter);
@@ -81,7 +81,7 @@ namespace ISSA_IdentityService.Repository.Base
             {
                 query = includes.Aggregate(query, (current, include) => current.Include(include));
             }
-            return await query.FirstOrDefaultAsync(cancellationToken);
+            return await query.AsNoTracking().FirstOrDefaultAsync(cancellationToken);
         }
 
         /// <summary>
@@ -118,8 +118,7 @@ namespace ISSA_IdentityService.Repository.Base
         {
             try
             {
-                var body = filter.Body as BinaryExpression;
-                if (body != null)
+                if (filter.Body is BinaryExpression body)
                 {
                     var ins = new ExpressionInspect(body);
                     return ins.Id;

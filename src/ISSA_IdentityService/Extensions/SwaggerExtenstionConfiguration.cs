@@ -7,6 +7,7 @@ namespace ISSA_IdentityService.Extensions
     {
         public static IServiceCollection ConfigureSwagger( this IServiceCollection services )
         {
+
             services.AddSwaggerGen( c =>
             {
                 c.SwaggerDoc( "v1", new OpenApiInfo { Title = "ISSA Identity Service", Version = "v1" } );

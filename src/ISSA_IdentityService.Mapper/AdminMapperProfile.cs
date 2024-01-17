@@ -8,7 +8,7 @@ namespace ISSA_IdentityService.Mapper
     {
         public AdminMapperProfile()
         {
-            CreateMap<AdminModel, Admin>().ForMember(x => x.Id, opt => opt.Ignore()).ReverseMap();
+            CreateMap<AdminModel, Admin>().ForMember(x => x.Id, opt => opt.Ignore()).ReverseMap();  
         }
     }
 }

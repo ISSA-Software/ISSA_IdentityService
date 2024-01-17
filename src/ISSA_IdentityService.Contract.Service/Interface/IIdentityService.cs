@@ -19,6 +19,7 @@ namespace ISSA_IdentityService.Contract.Service.Interface
         public Task<IList<Claim>> GetClaimsAsync(ApplicationUser user);
         public Task SetVerfiedEmailAsync(ApplicationUser user, string email);
         public Task SetUserAvatarUrlAsync(ApplicationUser identity, string photoUrl);
+        public Task UpdateUserAsync(ApplicationUser user);
 
         public Task<PaginatedList<ApplicationUser>> GetPaginatedAsync(ApplicationUserQuery query, CancellationToken cancellationToken = default);
     }

@@ -1,6 +1,6 @@
 ﻿using Invedia.DI.Attributes;
 using ISSA_IdentityService.Contract.Repository.Interface;
-using ISSA_IdentityService.Contract.Service.Interface;
+using ISSA_IdentityService.Contract.Service.Interface.InternalService;
 using Microsoft.Extensions.Logging;
 
 namespace ISSA_IdentityService.Service.Services.InternalServices

@@ -9,11 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Protos\Admin\admin.proto" />
-    <None Remove="Protos\Admin\admin_command.proto" />
-    <None Remove="Protos\Admin\admin_query.proto" />
-    <None Remove="Protos\Admin\admin_service.proto" />
-    <None Remove="protos\application_user.proto" />
+    <Compile Remove="google\**" />
+    <Content Remove="google\**" />
+    <EmbeddedResource Remove="google\**" />
+    <None Remove="google\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,20 +21,6 @@
     <ProjectReference Include="..\ISSA_IdentityService.Core\ISSA_IdentityService.Core.csproj" />
     <ProjectReference Include="..\ISSA_IdentityService.Repository\ISSA_IdentityService.Repository.csproj" />
     <ProjectReference Include="..\ISSA_IdentityService.Service\ISSA_IdentityService.Service.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Grpc.AspNetCore" Version="2.60.0" />
-    <PackageReference Include="Grpc.AspNetCore.Server.Reflection" Version="2.60.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Grpc.JsonTranscoding" Version="8.0.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Protobuf Include="Protos\Admin\admin.proto" />
-    <Protobuf Include="Protos\Admin\admin_command.proto" />
-    <Protobuf Include="Protos\Admin\admin_query.proto" />
-    <Protobuf Include="Protos\Admin\admin_service.proto" />
-    <Protobuf Include="Protos\Common\application_user.proto" />
   </ItemGroup>
 	
 </Project>

@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
-
-namespace ISSA_IdentityService.Core.Models
+﻿namespace ISSA_IdentityService.Core.Models
 {
     public class AuthenticateModel
     {

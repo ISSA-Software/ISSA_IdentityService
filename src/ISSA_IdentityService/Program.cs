@@ -62,7 +62,6 @@ namespace ISSA_IdentityService
                 options.ResponseCompressionAlgorithm = "gzip";
             }).AddJsonTranscoding();
             builder.Services.AddGrpcReflection();
-
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddHttpContextAccessor();
             builder.Services.AddHealthChecks();
@@ -117,6 +116,9 @@ namespace ISSA_IdentityService
             app.UseCors("Default");
             app.UseHttpsRedirection();
             app.UseSerilogRequestLogging();
+            app.MapGrpcService<Services.AdminRPCService>();
+            app.MapGrpcService<Services.MentorRPCService>();
+            app.MapGrpcService<Services.StudentRPCService>();
             app.MapControllers();
             app.UseRouting();
             //app.UseIdentityServer();
