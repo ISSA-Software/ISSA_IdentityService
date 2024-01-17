@@ -2,6 +2,6 @@
 {
     public class StudentModel
     {
-
+        public string ApplicationUserId { get; set; } = string.Empty;
     }
 }

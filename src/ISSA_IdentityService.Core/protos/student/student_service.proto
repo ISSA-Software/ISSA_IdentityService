@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+option csharp_namespace = "ISSA_IdentityService.Core.Protos.Student";
+
+import "protos/student/student_query.proto";
+import "protos/student/student_command.proto";
+import "google/api/annotations.proto";
+
+service StudentService {
+	rpc GetById (GetQuery) returns ( GetStudentResponse )
+	{
+		option (google.api.http) = {
+			get: "/api/student/{id}"
+		};
+	}
+	rpc Get (GetPagiQuery) returns ( GetStudentsPagiResponse )
+	{
+		option (google.api.http) = {
+			get: "/api/student"
+		};
+	}
+	rpc Create (CreateStudentCommand) returns ( CreateStudentResponse )
+	{
+		option (google.api.http) = {
+			post: "/api/student"
+			body: "*"
+		};
+	}
+	rpc Update (UpdateStudentCommand) returns ( UpdateStudentResponse )
+	{
+		option (google.api.http) = {
+			put: "/api/student"
+			body: "*"
+		};
+	}
+	rpc Delete (DeleteStudentCommand) returns ( DeleteStudentResponse )
+	{
+		option (google.api.http) = {
+			delete: "/api/student/{id}"
+		};
+	}
+}

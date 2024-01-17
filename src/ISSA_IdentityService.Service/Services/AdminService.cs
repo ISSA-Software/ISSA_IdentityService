@@ -55,6 +55,7 @@ namespace ISSA_IdentityService.Service.Services
         public async Task<int> UpdateAsync(string id, AdminModel model, CancellationToken cancellationToken = default)
         {
             var admin = mapper.Map<Admin>(model);
+           
             int i = await repository.UpdateAsync(admin, cancellationToken);
             return i;
         }

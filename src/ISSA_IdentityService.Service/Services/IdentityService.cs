@@ -141,5 +141,10 @@ namespace ISSA_IdentityService.Service.Services
             var rs = await result.PaginatedListAsync(query);
             return rs;
         }
+
+        public Task UpdateUserAsync(ApplicationUser user)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

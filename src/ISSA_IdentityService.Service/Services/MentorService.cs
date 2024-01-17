@@ -55,6 +55,7 @@ namespace ISSA_IdentityService.Service.Services
         public async Task<int> UpdateAsync(string id, MentorModel model, CancellationToken cancellationToken = default)
         {
             var Mentor = mapper.Map<Mentor>(model);
+            Mentor.Id = id;
             int i = await repository.UpdateAsync(Mentor, cancellationToken);
             return i;
         }

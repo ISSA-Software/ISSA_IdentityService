@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+option csharp_namespace = "ISSA_IdentityService.Core.Protos.Mentor";
+
+message CreateMentorCommand
+{
+	string application_user_id = 1;
+}
+
+message DeleteMentorCommand
+{
+	string id = 1;
+}
+
+message UpdateMentorCommand
+{
+	string id = 1;
+	string application_user_id = 2;
+}
+
+message CreateMentorResponse
+{
+	string id = 1;
+	optional string message = 2;
+	int32 status_code = 3;
+}
+
+message DeleteMentorResponse
+{
+	int32 affected_rows = 1;
+	optional string message = 2;
+	int32 status_code = 3;
+}
+
+message UpdateMentorResponse
+{
+	int32 affected_rows = 1;
+	optional string message = 2;
+	int32 status_code = 3;
+}

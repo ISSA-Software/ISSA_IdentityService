@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+option csharp_namespace = "ISSA_IdentityService.Core.Protos.Student";
+
+message CreateStudentCommand
+{
+	string application_user_id = 1;
+}
+
+message DeleteStudentCommand
+{
+	string id = 1;
+}
+
+message UpdateStudentCommand
+{
+	string id = 1;
+	string application_user_id = 2;
+}
+
+message CreateStudentResponse
+{
+	string id = 1;
+	optional string message = 2;
+	int32 status_code = 3;
+}
+
+message DeleteStudentResponse
+{
+	int32 affected_rows = 1;
+	optional string message = 2;
+	int32 status_code = 3;
+}
+
+message UpdateStudentResponse
+{
+	int32 affected_rows = 1;
+	optional string message = 2;
+	int32 status_code = 3;
+}

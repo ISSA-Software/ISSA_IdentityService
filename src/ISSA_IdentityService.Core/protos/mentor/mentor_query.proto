@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+option csharp_namespace = "ISSA_IdentityService.Core.Protos.Mentor";
+
+import "protos/mentor/mentor.proto";
+import "google/protobuf/wrappers.proto";
+
+message MentorPagi
+{
+	repeated Mentor items = 1;
+	int32 total_pages = 2;
+	int32 page_number = 3;
+	int32 total_count = 4;
+}
+
+message GetMentorsPagiResponse
+{
+	MentorPagi data = 1;
+	optional string message = 2;
+	int32 status_code = 3;
+}
+
+message GetMentorResponse
+{
+	Mentor Mentor = 1;
+	optional string message = 2;
+	int32 status_code = 3;
+}
+
+message GetQuery
+{
+	string id = 1;
+}
+
+message GetPagiQuery
+{
+	optional int32 page = 1;
+	optional int32 limit = 2;
+	google.protobuf.BoolValue is_deleted = 3;
+}
