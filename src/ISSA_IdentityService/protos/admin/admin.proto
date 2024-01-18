@@ -9,9 +9,9 @@ import "protos/common/application_user.proto";
 message Admin
 {
 	string id = 1;
-	bool is_deleted = 2;
+	bool is_delete = 2;
 	string application_user_id = 3;
 	ApplicationUser application_user = 4;
 	google.protobuf.Timestamp created_time = 5;
-	optional google.protobuf.Timestamp updated_time = 6;
+	optional google.protobuf.Timestamp last_updated_time = 6;
 }

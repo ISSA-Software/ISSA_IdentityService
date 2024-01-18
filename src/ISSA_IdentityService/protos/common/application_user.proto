@@ -23,7 +23,7 @@ message ApplicationUser
 	int32 access_failed_count = 15;
 	optional string name = 16;
 	optional string image_url = 17;
-	bool is_deleted = 18;
+	bool is_delete = 18;
 	google.protobuf.Timestamp created_time = 19;
-	optional google.protobuf.Timestamp updated_time = 20;
+	optional google.protobuf.Timestamp last_updated_time = 20;
 }

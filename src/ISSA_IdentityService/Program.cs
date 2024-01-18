@@ -100,7 +100,7 @@ namespace ISSA_IdentityService
             builder.Services.PrintServiceAddedToConsole();
             builder.Services.ConfigureResponseCompression();
             builder.Services.AddHostedService<BackgroundTaskConsumer>();
-            builder.Services.AddHostedService<KafkaConsumer>();
+            //builder.Services.AddHostedService<KafkaConsumer>();
             builder.Services.AddResponseCaching();
             var app = builder.Build();
 
