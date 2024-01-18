@@ -111,4 +111,25 @@ public class ObjHelper
         return value;
     }
 
+    public static T? TryConvertTo<T> (object obj) where T : class, new()
+    {
+        try
+        {
+            T? t = new();
+            foreach (var prop in obj.GetType().GetProperties())
+            {
+                var value = prop.GetValue(obj, null);
+                if (value != null)
+                {
+                    t.GetType()?.GetProperty(prop.Name)?.SetValue(t, value);
+                }
+            }
+            return t;
+        }
+        catch
+        {
+            return default;
+        }
+    }
+
 }

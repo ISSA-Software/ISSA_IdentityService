@@ -1,28 +1,28 @@
 syntax = "proto3";
 
-option csharp_namespace = "ISSA_IdentityService.Core.Protos.Admin";
+option csharp_namespace = "ISSA_IdentityService.Protos.Student";
 
-import "protos/admin/admin.proto";
+import "protos/student/student.proto";
 import "google/protobuf/wrappers.proto";
 
-message AdminPagi
+message StudentPagi
 {
-	repeated Admin items = 1;
+	repeated Student items = 1;
 	int32 total_pages = 2;
 	int32 page_number = 3;
 	int32 total_count = 4;
 }
 
-message GetAdminsPagiResponse
+message GetStudentsPagiResponse
 {
-	optional AdminPagi data = 1;
+	StudentPagi data = 1;
 	optional string message = 2;
 	int32 status_code = 3;
 }
 
-message GetAdminResponse
+message GetStudentResponse
 {
-	optional Admin admin = 1;
+	Student Student = 1;
 	optional string message = 2;
 	int32 status_code = 3;
 }

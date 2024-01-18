@@ -11,6 +11,5 @@ namespace ISSA_IdentityService.Contract.Service.Interface
         IUpdateAble<StudentModel, string>,
         IDeleteAble<string>
     {
-
     }
 }

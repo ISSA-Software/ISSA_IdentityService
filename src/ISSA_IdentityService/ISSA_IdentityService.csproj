@@ -16,11 +16,53 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="protos\admin\admin.proto" />
+    <None Remove="protos\admin\admin_command.proto" />
+    <None Remove="protos\admin\admin_query.proto" />
+    <None Remove="protos\admin\admin_service.proto" />
+    <None Remove="protos\common\application_user.proto" />
+    <None Remove="protos\mentor\mentor.proto" />
+    <None Remove="protos\mentor\mentor_command.proto" />
+    <None Remove="protos\mentor\mentor_query.proto" />
+    <None Remove="protos\mentor\mentor_service.proto" />
+    <None Remove="protos\student\student.proto" />
+    <None Remove="protos\student\student_command.proto" />
+    <None Remove="protos\student\student_query.proto" />
+    <None Remove="protos\student\student_service.proto" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Protobuf Include="protos\admin\admin_service.proto" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Grpc.AspNetCore" Version="2.60.0" />
+    <PackageReference Include="Grpc.AspNetCore.Server.Reflection" Version="2.60.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Grpc.JsonTranscoding" Version="8.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Grpc.Swagger" Version="0.8.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\ISSA_IdentityService.Contract.Repository\ISSA_IdentityService.Contract.Repository.csproj" />
     <ProjectReference Include="..\ISSA_IdentityService.Contract.Service\ISSA_IdentityService.Contract.Service.csproj" />
     <ProjectReference Include="..\ISSA_IdentityService.Core\ISSA_IdentityService.Core.csproj" />
     <ProjectReference Include="..\ISSA_IdentityService.Repository\ISSA_IdentityService.Repository.csproj" />
     <ProjectReference Include="..\ISSA_IdentityService.Service\ISSA_IdentityService.Service.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Protobuf Include="protos\admin\admin.proto" />
+    <Protobuf Include="protos\admin\admin_command.proto" />
+    <Protobuf Include="protos\admin\admin_query.proto" />
+    <Protobuf Include="protos\common\application_user.proto" />
+    <Protobuf Include="protos\mentor\mentor.proto" />
+    <Protobuf Include="protos\mentor\mentor_command.proto" />
+    <Protobuf Include="protos\mentor\mentor_query.proto" />
+    <Protobuf Include="protos\mentor\mentor_service.proto" />
+    <Protobuf Include="protos\student\student.proto" />
+    <Protobuf Include="protos\student\student_command.proto" />
+    <Protobuf Include="protos\student\student_query.proto" />
+    <Protobuf Include="protos\student\student_service.proto" />
   </ItemGroup>
 	
 </Project>
