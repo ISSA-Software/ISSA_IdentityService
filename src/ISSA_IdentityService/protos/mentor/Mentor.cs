@@ -8,7 +8,10 @@
             IsDelete = entity.IsDelete;
             CreatedTime = Google.Protobuf.WellKnownTypes.Timestamp.FromDateTimeOffset(entity.CreatedTime);
             LastUpdatedTime = entity.LastUpdatedTime == null ? null : Google.Protobuf.WellKnownTypes.Timestamp.FromDateTimeOffset(entity.LastUpdatedTime.Value);
-            ApplicationUser = entity.ApplicationUser;
+            if(entity.ApplicationUser != null)
+            {
+                ApplicationUser = entity.ApplicationUser;
+            }
         }
 
         public static implicit operator Mentor(Contract.Repository.Entity.Mentor entity) => new(entity);
@@ -27,4 +30,5 @@
 
         public static implicit operator MentorPagi(Core.Models.Common.PaginatedList<Contract.Repository.Entity.Mentor> pagination) => new(pagination);
     }
+
 }

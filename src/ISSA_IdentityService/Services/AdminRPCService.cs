@@ -8,11 +8,10 @@ using ISSA_IdentityService.Core.Models;
 
 namespace ISSA_IdentityService.Services
 {
-    public class AdminRPCService(Contract.Service.Interface.IAdminService service, IMapper mapper, ILogger<AdminRPCService> logger) : AdminServiceBase
+    public class AdminRPCService(Contract.Service.Interface.IAdminService service, ILogger<AdminRPCService> logger) : AdminServiceBase
     {
         public override async Task<GetAdminResponse> GetById(GetQuery request, ServerCallContext context)
         {
-            //return await base.GetById(request, context);
             try
             {
                 var admin = await service.GetByIdAsync(request.Id);
@@ -38,7 +37,6 @@ namespace ISSA_IdentityService.Services
                 };
                 return response;
             }
-
         }
 
         public override async Task<GetAdminsPagiResponse> Get(GetPagiQuery request, ServerCallContext context)
@@ -46,7 +44,7 @@ namespace ISSA_IdentityService.Services
             try
             {
                 var response = new GetAdminsPagiResponse();
-                var query = ObjHelper.ConvertTo<AdminQuery>(request);
+                var query = ObjHelper.TryConvertTo<AdminQuery>(request);
                 if (query == null)
                 {
                     response.StatusCode = (int)StatusCode.InvalidArgument;
@@ -61,6 +59,7 @@ namespace ISSA_IdentityService.Services
             }
             catch (Exception ex)
             {
+                logger.LogError(ex.Message);
                 var response = new GetAdminsPagiResponse
                 {
                     StatusCode = (int)StatusCode.Internal,
@@ -72,11 +71,10 @@ namespace ISSA_IdentityService.Services
 
         public override async Task<CreateAdminResponse> Create(CreateAdminCommand request, ServerCallContext context)
         {
-            //return await base.Create(request, context);
             try
             {
                 var response = new CreateAdminResponse();
-                var admin = ObjHelper.ConvertTo<AdminModel>(request);
+                var admin = ObjHelper.TryConvertTo<AdminModel>(request);
                 if (admin == null)
                 {
                     response.StatusCode = (int)StatusCode.InvalidArgument;
@@ -91,6 +89,7 @@ namespace ISSA_IdentityService.Services
             }
             catch (Exception ex)
             {
+                logger.LogError(ex.Message);
                 var response = new CreateAdminResponse
                 {
                     StatusCode = (int)StatusCode.Internal,
@@ -102,11 +101,10 @@ namespace ISSA_IdentityService.Services
 
         public override async Task<UpdateAdminResponse> Update(UpdateAdminCommand request, ServerCallContext context)
         {
-            //return await base.Update(request, context);
             try
             {
                 var response = new UpdateAdminResponse();
-                var admin = ObjHelper.ConvertTo<AdminModel>(request);
+                var admin = ObjHelper.TryConvertTo<AdminModel>(request);
                 if (admin == null)
                 {
                     response.StatusCode = (int)StatusCode.InvalidArgument;
@@ -121,6 +119,7 @@ namespace ISSA_IdentityService.Services
             }
             catch (Exception ex)
             {
+                logger.LogError(ex.Message);
                 var response = new UpdateAdminResponse
                 {
                     StatusCode = (int)StatusCode.Internal,
@@ -132,7 +131,6 @@ namespace ISSA_IdentityService.Services
 
         public override async Task<DeleteAdminResponse> Delete(DeleteAdminCommand request, ServerCallContext context)
         {
-            //return await base.Delete(request, context);
             try
             {
                 var response = new DeleteAdminResponse();
@@ -150,6 +148,7 @@ namespace ISSA_IdentityService.Services
             }
             catch (Exception ex)
             {
+                logger.LogError(ex.Message);
                 var response = new DeleteAdminResponse
                 {
                     StatusCode = (int)StatusCode.Internal,
