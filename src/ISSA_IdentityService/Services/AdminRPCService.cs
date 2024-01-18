@@ -1,9 +1,8 @@
 ﻿using AutoMapper;
 using Grpc.Core;
-using ISSA_IdentityService.Core.Models;
-using ISSA_IdentityService.Core.Protos.Admin;
+using ISSA_IdentityService.Protos.Admin;
 using ISSA_IdentityService.Core.QueryObject;
-using static ISSA_IdentityService.Core.Protos.Admin.AdminService;
+using static ISSA_IdentityService.Protos.Admin.AdminService;
 
 namespace ISSA_IdentityService.Services
 {

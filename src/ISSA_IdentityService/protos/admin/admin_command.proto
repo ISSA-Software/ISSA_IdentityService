@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option csharp_namespace = "ISSA_IdentityService.Core.Protos.Admin";
+option csharp_namespace = "ISSA_IdentityService.Protos.Admin";
 
 message CreateAdminCommand
 {

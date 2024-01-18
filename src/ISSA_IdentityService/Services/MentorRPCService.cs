@@ -1,6 +1,6 @@
 ﻿using Grpc.Core;
-using ISSA_IdentityService.Core.Protos.Mentor;
-using static ISSA_IdentityService.Core.Protos.Mentor.MentorService;
+using ISSA_IdentityService.Protos.Mentor;
+using static ISSA_IdentityService.Protos.Mentor.MentorService;
 
 namespace ISSA_IdentityService.Services
 {

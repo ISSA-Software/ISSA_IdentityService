@@ -1,6 +1,6 @@
 ﻿using Grpc.Core;
-using ISSA_IdentityService.Core.Protos.Student;
-using static ISSA_IdentityService.Core.Protos.Student.StudentService;
+using ISSA_IdentityService.Protos.Student;
+using static ISSA_IdentityService.Protos.Student.StudentService;
 
 namespace ISSA_IdentityService.Services
 {
@@ -8,6 +8,7 @@ namespace ISSA_IdentityService.Services
     {
         public override Task<CreateStudentResponse> Create(CreateStudentCommand request, ServerCallContext context)
         {
+            var student = new Student();
             return base.Create(request, context);
         }
 

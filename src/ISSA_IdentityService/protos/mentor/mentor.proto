@@ -1,12 +1,11 @@
 syntax = "proto3";
 
-option csharp_namespace = "ISSA_IdentityService.Core.Protos.Admin";
-
+option csharp_namespace = "ISSA_IdentityService.Protos.Mentor";
 
 import "google/protobuf/timestamp.proto";
 import "protos/common/application_user.proto";
 
-message Admin
+message Mentor
 {
 	string id = 1;
 	bool is_deleted = 2;

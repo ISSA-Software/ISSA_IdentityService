@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option csharp_namespace = "ISSA_IdentityService.Core.Protos.Mentor";
+option csharp_namespace = "ISSA_IdentityService.Protos.Mentor";
 
 import "protos/mentor/mentor_query.proto";
 import "protos/mentor/mentor_command.proto";
