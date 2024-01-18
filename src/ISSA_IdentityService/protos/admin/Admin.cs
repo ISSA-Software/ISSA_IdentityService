@@ -8,8 +8,8 @@ namespace ISSA_IdentityService.Protos.Admin
         {
             Id = entity.Id;
             IsDelete = entity.IsDelete;
-            CreatedTime = Timestamp.FromDateTimeOffset(entity.CreatedTime);
-            LastUpdatedTime = entity.LastUpdatedTime == null ? null : Timestamp.FromDateTimeOffset(entity.LastUpdatedTime.Value);
+            CreatedTime = Timestamp.FromDateTime(entity.CreatedTime);
+            LastUpdatedTime = entity.LastUpdatedTime == null ? null : Timestamp.FromDateTime(entity.LastUpdatedTime.Value);
             if(entity.ApplicationUser != null)
             {
                 ApplicationUser = entity.ApplicationUser;

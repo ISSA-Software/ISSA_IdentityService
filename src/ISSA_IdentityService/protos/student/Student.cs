@@ -1,4 +1,6 @@
-﻿namespace ISSA_IdentityService.Protos.Student
+﻿using Google.Protobuf.WellKnownTypes;
+
+namespace ISSA_IdentityService.Protos.Student
 {
     public partial class Student
     {
@@ -6,8 +8,8 @@
         {
             Id = entity.Id;
             IsDelete = entity.IsDelete;
-            CreatedTime = Google.Protobuf.WellKnownTypes.Timestamp.FromDateTimeOffset(entity.CreatedTime);
-            LastUpdatedTime = entity.LastUpdatedTime == null ? null : Google.Protobuf.WellKnownTypes.Timestamp.FromDateTimeOffset(entity.LastUpdatedTime.Value);
+            CreatedTime = Timestamp.FromDateTime(entity.CreatedTime);
+            LastUpdatedTime = entity.LastUpdatedTime == null ? null : Timestamp.FromDateTime(entity.LastUpdatedTime.Value);
             if (entity.ApplicationUser != null)
             {
                 ApplicationUser = entity.ApplicationUser;

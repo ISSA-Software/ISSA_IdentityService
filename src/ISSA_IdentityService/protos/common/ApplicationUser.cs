@@ -24,8 +24,8 @@ namespace ISSA_IdentityService.Protos
             Name = entity.Name;
             ImageUrl = entity.ImageUrl;
             IsDelete = entity.IsDelete;
-            CreatedTime = Timestamp.FromDateTimeOffset(entity.CreatedTime);
-            LastUpdatedTime = entity.LastUpdatedTime == null ? null : Timestamp.FromDateTimeOffset(entity.LastUpdatedTime.Value);
+            CreatedTime = Timestamp.FromDateTime(entity.CreatedTime);
+            LastUpdatedTime = entity.LastUpdatedTime == null ? null : Timestamp.FromDateTime(entity.LastUpdatedTime.Value);
         }
 
         public static implicit operator ApplicationUser(Contract.Repository.Entity.IdentityModels.ApplicationUser entity) => new(entity);

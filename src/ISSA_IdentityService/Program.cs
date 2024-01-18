@@ -13,7 +13,6 @@ using System.Text.RegularExpressions;
 using Grpc.AspNetCore.Server;
 using Grpc.Net.Compression;
 using ISSA_IdentityService.Service.Services.InternalServices;
-using ISSA_IdentityService.Service.Services.InternalServices.Kafka;
 
 namespace ISSA_IdentityService
 {

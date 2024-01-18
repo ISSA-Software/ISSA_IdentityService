@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Grpc.Core;
+﻿using Grpc.Core;
 using ISSA_IdentityService.Protos.Admin;
 using ISSA_IdentityService.Core.QueryObject;
 using static ISSA_IdentityService.Protos.Admin.AdminService;

@@ -128,7 +128,7 @@ public class ObjHelper
         }
         catch
         {
-            return default(T);
+            return default;
         }
     }
 
