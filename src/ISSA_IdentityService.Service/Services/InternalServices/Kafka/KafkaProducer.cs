@@ -9,7 +9,7 @@ namespace ISSA_IdentityService.Service.Services.InternalServices.Kafka
     [SingletonDependency(ServiceType = typeof(IKafkaProducer))]
     public class KafkaProducer : IKafkaProducer
     {
-        private readonly IProducer<Null, string> _producer;
+        private readonly IProducer<string, string> _producer;
 
         public KafkaProducer()
         {
@@ -23,13 +23,14 @@ namespace ISSA_IdentityService.Service.Services.InternalServices.Kafka
                 CompressionLevel = 5,
             };
 
-            _producer = new ProducerBuilder<Null, string>(config).Build();
+            _producer = new ProducerBuilder<string, string>(config).Build();
         }
 
         public void Produce(string topic, string message, CancellationToken cancellationToken = default)
         {
-            var kafkamessage = new Message<Null, string>
+            var kafkamessage = new Message<string, string>
             {
+                Key = Guid.NewGuid().ToString(),
                 Value = message,
                 Timestamp = new Timestamp(DateTime.UtcNow),
                 Headers =

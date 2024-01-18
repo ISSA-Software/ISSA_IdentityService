@@ -13,6 +13,7 @@ using System.Text.RegularExpressions;
 using Grpc.AspNetCore.Server;
 using Grpc.Net.Compression;
 using ISSA_IdentityService.Service.Services.InternalServices;
+using ISSA_IdentityService.Service.Services.InternalServices.Kafka;
 
 namespace ISSA_IdentityService
 {
@@ -99,6 +100,7 @@ namespace ISSA_IdentityService
             builder.Services.PrintServiceAddedToConsole();
             builder.Services.ConfigureResponseCompression();
             builder.Services.AddHostedService<BackgroundTaskConsumer>();
+            builder.Services.AddHostedService<KafkaConsumer>();
             builder.Services.AddResponseCaching();
             var app = builder.Build();
 
