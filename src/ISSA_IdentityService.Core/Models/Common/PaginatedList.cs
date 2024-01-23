@@ -3,20 +3,12 @@ using Microsoft.EntityFrameworkCore;
 using ISSA_IdentityService.Core.QueryObject;
 
 namespace ISSA_IdentityService.Core.Models.Common;
-public class PaginatedList<T>
+public class PaginatedList<T>(IReadOnlyCollection<T> items, int count, int pageNumber, int pageSize)
 {
-    public IReadOnlyCollection<T> Items { get; }
-    public int PageNumber { get; set; }
-    public int TotalPages { get; set; }
-    public int TotalCount { get; set; }
-
-    public PaginatedList(IReadOnlyCollection<T> items, int count, int pageNumber, int pageSize)
-    {
-        PageNumber = pageNumber;
-        TotalPages = (int)Math.Ceiling(pageSize == 0 ? 0 : count / (double)pageSize);
-        TotalCount = count;
-        Items = items;
-    }
+    public IReadOnlyCollection<T> Items { get; } = items;
+    public int PageNumber { get; set; } = pageNumber;
+    public int TotalPages { get; set; } = (int)Math.Ceiling(pageSize == 0 ? 0 : count / (double)pageSize);
+    public int TotalCount { get; set; } = count;
 
     public bool HasPreviousPage => PageNumber > 1;
 
@@ -24,14 +16,14 @@ public class PaginatedList<T>
 
     public static async Task<PaginatedList<T>> CreateAsync(IQueryable<T> source, BaseQuery query)
     {
-        if (query.StartDate != null)
+        if (query.CreateFrom != null)
         {
-            DateTimeOffset startDate = DateTime.SpecifyKind(query.StartDate.Value, DateTimeKind.Utc);
+            DateTime startDate = DateTime.SpecifyKind(query.CreateFrom.Value, DateTimeKind.Utc);
             ParameterExpression xParam = Expression.Parameter(typeof(T), "x");
             MemberExpression createdTimeProperty = Expression.Property(xParam, "CreatedTime");
             if (createdTimeProperty != null)
             {
-                BinaryExpression comparison = Expression.GreaterThanOrEqual(createdTimeProperty, Expression.Constant(startDate, typeof(DateTimeOffset)));
+                BinaryExpression comparison = Expression.GreaterThanOrEqual(createdTimeProperty, Expression.Constant(startDate, typeof(DateTime)));
                 Expression<Func<T, bool>> expression = Expression.Lambda<Func<T, bool>>(comparison, xParam);
                 source = source.Where(expression);
             }
@@ -41,14 +33,14 @@ public class PaginatedList<T>
             }
         }
 
-        if (query.EndDate != null)
+        if (query.CreateTo != null)
         {
-            DateTimeOffset endDate = DateTime.SpecifyKind(query.EndDate.Value.AddMilliseconds(86399000), DateTimeKind.Utc);
+            DateTime endDate = DateTime.SpecifyKind(query.CreateTo.Value.AddMilliseconds(86399000), DateTimeKind.Utc);
             ParameterExpression xParam = Expression.Parameter(typeof(T), "x");
             MemberExpression createdTimeProperty = Expression.Property(xParam, "CreatedTime");
             if (createdTimeProperty != null)
             {
-                BinaryExpression comparison = Expression.LessThanOrEqual(createdTimeProperty, Expression.Constant(endDate, typeof(DateTimeOffset)));
+                BinaryExpression comparison = Expression.LessThanOrEqual(createdTimeProperty, Expression.Constant(endDate, typeof(DateTime)));
                 Expression<Func<T, bool>> expression = Expression.Lambda<Func<T, bool>>(comparison, xParam);
                 source = source.Where(expression);
             }
@@ -57,6 +49,7 @@ public class PaginatedList<T>
                 throw new Exception("Unsupported type: CreatedTime property not found !!!");
             }
         }
+        //TODO: add query for update and delete
 
         //if (query.Sort == null)
         //{

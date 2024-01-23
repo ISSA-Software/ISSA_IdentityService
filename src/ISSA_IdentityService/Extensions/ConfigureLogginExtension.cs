@@ -21,7 +21,7 @@ namespace ISSA_IdentityService.Extensions
           .Enrich.WithMachineName()
           .WriteTo.Debug()
           .WriteTo.Console()
-          .WriteTo.Elasticsearch(ConfigureElasticSink(configuration, environment))
+          //.WriteTo.Elasticsearch(ConfigureElasticSink(configuration, environment))
           .Enrich.WithProperty("Environment", environment)
           .ReadFrom.Configuration(configuration)
           .CreateLogger();

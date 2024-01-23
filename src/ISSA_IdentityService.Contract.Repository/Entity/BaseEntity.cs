@@ -15,6 +15,7 @@ namespace ISSA_IdentityService.Contract.Repository.Entity
         public bool IsDelete { get; set; } = false;
         public DateTime CreatedTime { get; set; }
         public DateTime? LastUpdatedTime { get; set; }
+        public DateTime? DeletedTime { get; set; }
 
         //public DateTimeOffset? DeletedTime { get; set; }
     }
